@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Josh Maldonado social share image</title>
+  <desc id="desc">A dark social preview card with Josh Maldonado's name and role.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#06070a" />
+      <stop offset="100%" stop-color="#11131a" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04" />
+    </linearGradient>
+    <filter id="blur-xl" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="72" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <g filter="url(#blur-xl)" opacity="0.9">
+    <circle cx="210" cy="110" r="150" fill="#6f82ff" fill-opacity="0.34" />
+    <circle cx="1010" cy="510" r="170" fill="#56ffc4" fill-opacity="0.18" />
+    <circle cx="910" cy="160" r="100" fill="#ffffff" fill-opacity="0.08" />
+  </g>
+
+  <rect
+    x="48"
+    y="48"
+    width="1104"
+    height="534"
+    rx="28"
+    fill="#0c0d11"
+    fill-opacity="0.7"
+    stroke="#ffffff"
+    stroke-opacity="0.12"
+  />
+
+  <text
+    x="96"
+    y="150"
+    fill="#9ea3b7"
+    font-family="SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+    font-size="28"
+    letter-spacing="7"
+  >
+    CREATIVE PRODUCER &amp; PRODUCT MANAGER
+  </text>
+
+  <text
+    x="96"
+    y="292"
+    fill="#f5f7ff"
+    font-family="SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+    font-size="72"
+    font-weight="700"
+    letter-spacing="-2"
+  >
+    Josh Maldonado
+  </text>
+
+  <text
+    x="96"
+    y="370"
+    fill="#d0d5e6"
+    font-family="SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+    font-size="28"
+  >
+    Creative producer and product manager working at the intersection of
+  </text>
+  <text
+    x="96"
+    y="412"
+    fill="#d0d5e6"
+    font-family="SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+    font-size="28"
+  >
+    media, technology, and culture.
+  </text>
+
+  <rect
+    x="96"
+    y="468"
+    width="430"
+    height="62"
+    rx="31"
+    fill="#12151d"
+    stroke="#ffffff"
+    stroke-opacity="0.12"
+  />
+  <circle cx="134" cy="499" r="8" fill="#56ffc4" />
+  <text
+    x="160"
+    y="508"
+    fill="#f5f7ff"
+    font-family="SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace"
+    font-size="24"
+  >
+    www.joshmaldonado.com
+  </text>
+</svg>
