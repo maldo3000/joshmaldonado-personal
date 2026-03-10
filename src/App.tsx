@@ -85,7 +85,12 @@ function App() {
             <p className="intro">
               Creative Producer & Product Manager // currently building a
               platform for curious, future-minded creatives @{' '}
-              <a href="https://ctrlshift.community/" target="_blank" rel="noreferrer">
+              <a
+                className="inline-highlight-link"
+                href="https://ctrlshift.community/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 CTRL+SHIFT
               </a>
             </p>
