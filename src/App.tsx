@@ -14,7 +14,7 @@ const socialLinks: SocialLink[] = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/joshmal/',
+    href: 'https://www.linkedin.com/in/joshmaldonado/',
     icon: 'linkedin',
   },
   {
