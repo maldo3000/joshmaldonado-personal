@@ -74,9 +74,6 @@ function SocialIcon({ icon }: Pick<SocialLink, 'icon'>) {
 function App() {
   return (
     <div className="site-shell">
-      <div className="ambient ambient-left" aria-hidden="true" />
-      <div className="ambient ambient-right" aria-hidden="true" />
-
       <main className="page">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
