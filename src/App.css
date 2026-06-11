@@ -60,24 +60,33 @@
 }
 
 .inline-highlight-link {
-  color: var(--text-strong);
-  opacity: 0.85;
+  color: #ffffff;
   text-underline-offset: 0.25rem;
-  text-shadow:
-    0 0 0.5rem rgba(255, 255, 255, 0.35),
-    0 0 1rem rgba(255, 255, 255, 0.15);
-  transition:
-    opacity 180ms ease,
-    text-shadow 180ms ease,
-    color 180ms ease;
+  animation: link-glow 2.4s ease-in-out infinite;
+  transition: text-shadow 180ms ease;
 }
 
 .inline-highlight-link:hover,
 .inline-highlight-link:focus-visible {
-  opacity: 1;
+  animation: none;
   text-shadow:
-    0 0 0.75rem rgba(255, 255, 255, 0.35),
-    0 0 1.4rem rgba(255, 255, 255, 0.18);
+    0 0 0.6rem rgba(255, 255, 255, 0.85),
+    0 0 1.6rem rgba(255, 255, 255, 0.45),
+    0 0 2.6rem rgba(255, 255, 255, 0.25);
+}
+
+@keyframes link-glow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 0.5rem rgba(255, 255, 255, 0.45),
+      0 0 1.2rem rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 0.7rem rgba(255, 255, 255, 0.7),
+      0 0 1.8rem rgba(255, 255, 255, 0.35);
+  }
 }
 
 .socials {
@@ -196,5 +205,12 @@
 
   .social-link {
     transition: none;
+  }
+
+  .inline-highlight-link {
+    animation: none;
+    text-shadow:
+      0 0 0.6rem rgba(255, 255, 255, 0.6),
+      0 0 1.5rem rgba(255, 255, 255, 0.3);
   }
 }
