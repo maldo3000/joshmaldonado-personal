@@ -463,7 +463,7 @@
 
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(26rem, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -944,22 +944,12 @@
   }
 
   .contact-photo img {
-    mask-image: linear-gradient(
-      to bottom,
-      black 45%,
-      rgba(0, 0, 0, 0.4) 80%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      black 45%,
-      rgba(0, 0, 0, 0.4) 80%,
-      transparent 100%
-    );
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 
   .contact-copy {
-    padding: 0.5rem 0 0;
+    padding: 1.4rem 0 0;
   }
 
   .services-section {

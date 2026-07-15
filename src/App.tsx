@@ -62,8 +62,8 @@ const services: Service[] = [
     title: 'Video & Content Production',
     tagline: 'Stories produced end to end',
     items: [
-      'Brand and web video (Square etc.)',
-      'Producing, directing and post',
+      'Brand and web video',
+      'Producing, directing and post-production',
       'Video games and interactive production',
       'Animation and 3D production pipeline management',
       'Generative and AI-assisted media — when it fits the project',
@@ -295,6 +295,59 @@ function WorkSection() {
     }
   }, [modalProject])
 
+  // On the mobile breakpoint there is no hover, so play the preview of the
+  // card sitting closest to the middle of the viewport while scrolling.
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 640px)')
+    let raf = 0
+
+    const update = () => {
+      raf = 0
+      const mid = window.innerHeight / 2
+      const band = window.innerHeight * 0.3
+      let bestId: string | null = null
+      let bestDistance = Infinity
+      document
+        .querySelectorAll<HTMLElement>('.work-card.has-video')
+        .forEach((el) => {
+          const rect = el.getBoundingClientRect()
+          const center = rect.top + rect.height / 2
+          const distance = Math.abs(center - mid)
+          const overlapsBand =
+            rect.top < mid + band / 2 && rect.bottom > mid - band / 2
+          if (overlapsBand && distance < bestDistance) {
+            bestDistance = distance
+            bestId = el.dataset.projectId ?? null
+          }
+        })
+      setPreviewId(bestId)
+    }
+
+    const schedule = () => {
+      if (!mql.matches) return
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+
+    const onBreakpointChange = () => {
+      if (mql.matches) {
+        schedule()
+      } else {
+        setPreviewId(null)
+      }
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    mql.addEventListener('change', onBreakpointChange)
+    schedule()
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      mql.removeEventListener('change', onBreakpointChange)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   const trackSpotlight = (event: React.MouseEvent<HTMLElement>) => {
     const card = event.currentTarget
     const rect = card.getBoundingClientRect()
@@ -313,6 +366,7 @@ function WorkSection() {
         {projects.map((p, i) => (
           <article
             key={p.id}
+            data-project-id={p.id}
             className={`work-card${p.video ? ' has-video' : ''}`}
             onMouseMove={trackSpotlight}
             onMouseEnter={p.video ? () => setPreviewId(p.id) : undefined}
@@ -475,7 +529,7 @@ function ContactSection() {
         </div>
         <div className="contact-copy">
           <p className="section-label">Let&rsquo;s talk</p>
-          <h2>Got something worth building?</h2>
+          <h2>Have an idea in mind?</h2>
           <p>
             Experiential builds, films, AI pipelines or something that
             doesn&rsquo;t have a name yet — tell me what you&rsquo;re making
