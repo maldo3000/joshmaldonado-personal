@@ -247,7 +247,7 @@ function SocialIcon({ icon }: Pick<SocialLink, 'icon'>) {
   }
 }
 
-function useReveal<T extends HTMLElement>() {
+function useReveal<T extends HTMLElement>(requireScroll = false) {
   const ref = useRef<T | null>(null)
 
   useEffect(() => {
@@ -265,14 +265,15 @@ function useReveal<T extends HTMLElement>() {
       return false
     }
 
-    if (check()) return
+    // requireScroll: never reveal at mount, only once the user scrolls
+    if (!requireScroll && check()) return
     window.addEventListener('scroll', check, { passive: true })
     window.addEventListener('resize', check)
     return () => {
       window.removeEventListener('scroll', check)
       window.removeEventListener('resize', check)
     }
-  }, [])
+  }, [requireScroll])
 
   return ref
 }
@@ -551,6 +552,7 @@ function ContactSection() {
 }
 
 function ServicesSection() {
+  const revealRef = useReveal<HTMLElement>(true)
   const [active, setActive] = useState(0)
   const headerRefs = useRef<Array<HTMLButtonElement | null>>([])
 
@@ -571,7 +573,12 @@ function ServicesSection() {
   }
 
   return (
-    <section id="what-i-do" className="services-section" aria-label="Services">
+    <section
+      ref={revealRef}
+      id="what-i-do"
+      className="services-section reveal-on-scroll"
+      aria-label="Services"
+    >
       <p className="section-label">What I do</p>
       <div className="service-rows">
         {services.map((s, i) => {
@@ -630,6 +637,8 @@ function ServicesSection() {
 }
 
 function App() {
+  const playlistRevealRef = useReveal<HTMLElement>()
+
   return (
     <div className="site-shell">
       <main className="page">
@@ -727,8 +736,9 @@ function App() {
         <ContactSection />
 
         <section
+          ref={playlistRevealRef}
           id="playlist"
-          className="playlist-section"
+          className="playlist-section reveal-on-scroll"
           aria-label="Spotify playlist"
         >
           <div className="playlist-frame">

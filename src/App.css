@@ -290,9 +290,6 @@
   justify-content: center;
   margin-top: 3rem;
   padding: 3rem 0;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: reveal 700ms ease-out 420ms forwards;
 }
 
 
@@ -864,9 +861,6 @@
 
 .playlist-section {
   margin-top: 7rem;
-  opacity: 0;
-  transform: translateY(18px);
-  animation: reveal 700ms ease-out 560ms forwards;
 }
 
 .playlist-frame {
