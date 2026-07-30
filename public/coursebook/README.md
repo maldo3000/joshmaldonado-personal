@@ -60,9 +60,10 @@ The visual system is defined as custom properties at the top of the stylesheet:
 - Five stage lights, one per part, drawn from the event photography: mint
   `#56ffc4`, violet `#8b97ff`, pink `#ff6fae`, amber `#ffc46f`, cyan `#6fd8ff`.
   A part's light drives its rail marker, chapter numeral, accents and canvases.
-- Roboto Mono for chrome, labels and numerals; Newsreader for running prose.
-  Both are inlined from `fonts/`, so there is no CDN dependency and no silent
-  fallback.
+- Three type roles, all inlined from `fonts/` so there is no CDN dependency and
+  no silent fallback: **Work Sans** (heavy) for titles, section headings and
+  chapter names in the contents rail; **Newsreader** for running prose;
+  **Roboto Mono** for labels, eyebrows, numerals, data and UI chrome.
 
 Light ("paper") and dark ("studio") themes are both designed. The page follows
 the reader's system preference and the toggle in the rail overrides it.
