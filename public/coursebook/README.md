@@ -55,11 +55,15 @@ search index, pager, progress meter and export all derive from that array.
 
 The visual system is defined as custom properties at the top of the stylesheet:
 
-- Ground `#0c0c0c`, warm off-white `#f6f5ef`, hairline rules — the CTRL+SHIFT
-  treatment used across the site.
-- Five stage lights, one per part, drawn from the event photography: mint
-  `#56ffc4`, violet `#8b97ff`, pink `#ff6fae`, amber `#ffc46f`, cyan `#6fd8ff`.
-  A part's light drives its rail marker, chapter numeral, accents and canvases.
+- Ground is true black `#000` with warm off-white `#f6f5ef` and hairline rules.
+  No gradients, no filled panels, no nested boxes: the reading pane is separated
+  with single rules, and buttons highlight in white.
+- Colour is deliberately restricted to two places. Five stage lights drawn from
+  the event photography — mint `#56ffc4`, violet `#8b97ff`, pink `#ff6fae`,
+  amber `#ffc46f`, cyan `#6fd8ff` — one per part, appearing only on the **part
+  titles in the contents rail** and inside **interactive and diagram
+  components** (sliders, chips, bars, canvases). Everything in the reading pane
+  itself is black and white.
 - Three type roles, all inlined from `fonts/` so there is no CDN dependency and
   no silent fallback: **Work Sans** (heavy) for titles, section headings and
   chapter names in the contents rail; **Newsreader** for running prose;
