@@ -5,15 +5,22 @@ import type { PortfolioProject } from './usePortfolio'
 import { usePortfolio } from './usePortfolio'
 import './portfolio.css'
 
-const FILTERS = [
-  { key: 'all', label: 'All Work', path: '/portfolio' },
+/**
+ * Nav deliberately omits an "all" entry: /portfolio still shows everything,
+ * but a client sent a focused link shouldn't be nudged back out to the
+ * full list.
+ */
+const NAV_FILTERS = [
   { key: 'experiential', label: 'Experiential', path: '/portfolio/experiential' },
   { key: 'content', label: 'Film & Content', path: '/portfolio/content' },
   { key: 'interactive', label: 'Interactive', path: '/portfolio/interactive' },
   { key: 'ai', label: 'AI', path: '/portfolio/ai' },
 ] as const
 
-type FilterKey = (typeof FILTERS)[number]['key']
+type FilterKey = (typeof NAV_FILTERS)[number]['key'] | 'all'
+
+const isFilterKey = (value: string | undefined): value is FilterKey =>
+  value === 'all' || NAV_FILTERS.some((f) => f.key === value)
 
 function isTouchLayout() {
   return window.matchMedia('(hover: none), (max-width: 640px)').matches
@@ -31,8 +38,7 @@ export default function PortfolioPage() {
   const { state, data, error, login } = usePortfolio()
   const [activeSlug, setActiveSlug] = useState<string | null>(null)
 
-  const filter: FilterKey = (FILTERS.find((f) => f.key === filterParam)?.key ??
-    'all') as FilterKey
+  const filter: FilterKey = isFilterKey(filterParam) ? filterParam : 'all'
 
   useEffect(() => {
     document.title = 'Portfolio — Josh Maldonado'
@@ -40,7 +46,7 @@ export default function PortfolioPage() {
 
   // Unknown filter segment (and not a known route) → treat as All
   useEffect(() => {
-    if (filterParam && !FILTERS.some((f) => f.key === filterParam)) {
+    if (filterParam && !isFilterKey(filterParam)) {
       navigate('/portfolio', { replace: true })
     }
   }, [filterParam, navigate])
@@ -108,7 +114,7 @@ export default function PortfolioPage() {
           Josh Maldonado
         </Link>
         <nav className="pf-filters" aria-label="Portfolio filters">
-          {FILTERS.map((f) => (
+          {NAV_FILTERS.map((f) => (
             <Link
               key={f.key}
               to={f.path}
