@@ -49,6 +49,10 @@ export function usePortfolio() {
         })
         if (res.ok) {
           await fetchData()
+        } else if (res.status === 500) {
+          setError(
+            'Portfolio password is not configured on this deployment.'
+          )
         } else {
           setError('Incorrect password')
         }

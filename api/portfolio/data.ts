@@ -1,6 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { COOKIE_NAME, parseCookies, tokenIsValid } from '../_lib/auth'
-import { CATEGORY_LABELS, projects } from '../_lib/projects'
+// NB: package.json sets "type": "module", so relative imports need explicit
+// extensions or the deployed function crashes with ERR_MODULE_NOT_FOUND.
+import { COOKIE_NAME, parseCookies, tokenIsValid } from '../_lib/auth.js'
+import { CATEGORY_LABELS, projects } from '../_lib/projects.js'
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {

@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { passwordIsCorrect, sessionCookie, sessionToken } from '../_lib/auth'
+// NB: package.json sets "type": "module", so relative imports need explicit
+// extensions or the deployed function crashes with ERR_MODULE_NOT_FOUND.
+import { passwordIsCorrect, sessionCookie, sessionToken } from '../_lib/auth.js'
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
