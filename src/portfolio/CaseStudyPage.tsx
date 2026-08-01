@@ -53,21 +53,31 @@ export default function CaseStudyPage() {
       </header>
 
       <main className="pf-case">
-        {project.media && (
-          <div className="pf-case-hero">
-            {project.media.video ? (
-              <video
-                src={project.media.video}
-                poster={project.media.poster}
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-            ) : project.media.image ? (
-              <img src={project.media.image} alt="" />
-            ) : null}
+        {/* A gallery stands in for the hero — these stills are portrait and a
+            16:9 hero crop would cut the subject out. */}
+        {project.gallery ? (
+          <div className="pf-case-gallery">
+            {project.gallery.map((src) => (
+              <img key={src} src={src} alt="" loading="lazy" />
+            ))}
           </div>
+        ) : (
+          project.media && (
+            <div className="pf-case-hero">
+              {project.media.video ? (
+                <video
+                  src={project.media.video}
+                  poster={project.media.poster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : project.media.image ? (
+                <img src={project.media.image} alt="" />
+              ) : null}
+            </div>
+          )
         )}
 
         <p className="pf-case-client">{project.client}</p>

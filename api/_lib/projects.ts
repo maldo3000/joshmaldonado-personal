@@ -14,6 +14,8 @@ export type PortfolioProject = {
   /** One-liner shown when a row expands */
   blurb: string
   media?: { video?: string; image?: string; poster?: string }
+  /** Extra stills shown as a grid on the case-study page */
+  gallery?: string[]
   /** External destination — used when there is no case-study page */
   externalUrl?: string
   /** Present → row opens /portfolio/p/:slug */
@@ -126,13 +128,20 @@ export const projects: PortfolioProject[] = [
     role: 'Producer',
     year: '2022',
     blurb:
-      'Large-format banner installation for Volvo inside Toronto’s Eaton Centre — fabrication through install.',
+      'The Volvo Cars Safety Standard hung at architectural scale in Toronto’s Eaton Centre — banners, rigging and crash-tested vehicles on the floor below.',
+    media: { image: '/volvo/volvo-atrium.jpg' },
+    gallery: [
+      '/volvo/volvo-atrium.jpg',
+      '/volvo/volvo-banners.jpg',
+      '/volvo/volvo-signage.jpg',
+      '/volvo/volvo-detail.jpg',
+    ],
     caseStudy: {
       intro:
-        'A flagship out-of-home moment for Volvo in one of Canada’s highest-traffic retail spaces.',
+        'Volvo’s safety record is a number nobody feels. In the Eaton Centre atrium, we made it something you had to crane your neck at.',
       body: [
-        'I produced the large-format build end to end — fabrication vendors, structural and venue approvals, and the overnight install windows the Eaton Centre demands.',
-        'The result was brand presence at architectural scale, delivered without a single lost trading hour for the venue.',
+        'The campaign suspended the Volvo Cars Safety Standard above Toronto’s busiest retail floor: a red banner marked 7, flanked by black banners marked 4. Volvo tests front crashes at energy equivalent to dropping a car from the seventh floor — the industry standard stops at the fourth. The comparison only lands at full height, which is why it was built as a multi-storey install rather than a poster.',
+        'I produced the build — large-format fabrication, rigging and structural approvals for suspending from the atrium truss, and the overnight install windows the centre requires. On the floor below, crash-tested vehicles from the Volvo Safety Centre sat with their test placards still attached, so the claim overhead had physical evidence underneath it.',
       ],
     },
   },
