@@ -703,6 +703,24 @@
   line-height: 1.85;
 }
 
+.work-portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.work-portfolio-link:hover,
+.work-portfolio-link:focus-visible {
+  color: var(--text-strong);
+  text-shadow: 0 0 0.7rem rgba(255, 255, 255, 0.4);
+}
+
 .work-credit {
   margin: 0 0 1.6rem;
   color: var(--muted);

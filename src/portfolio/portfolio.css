@@ -1,0 +1,536 @@
+/* ── Private portfolio ─────────────────────────────────────────── */
+
+.pf-shell {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pf-loading {
+  background: var(--page-background);
+}
+
+/* Full-bleed media backdrop behind the list */
+.pf-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.pf-backdrop video,
+.pf-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.85);
+  opacity: 0;
+  animation: pf-backdrop-in 700ms ease 80ms forwards;
+}
+
+@keyframes pf-backdrop-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.pf-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(12, 12, 12, 0.92), rgba(12, 12, 12, 0.25) 30%, rgba(12, 12, 12, 0.35) 70%, rgba(12, 12, 12, 0.9)),
+    radial-gradient(ellipse at center, transparent 40%, rgba(12, 12, 12, 0.55));
+}
+
+.pf-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1.6rem clamp(1.5rem, 4vw, 3rem);
+}
+
+.pf-name {
+  color: var(--text-strong);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pf-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+.pf-filters a {
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.pf-filters a:hover,
+.pf-filters a:focus-visible {
+  color: var(--text);
+}
+
+.pf-filters a.is-active {
+  color: var(--text-strong);
+  text-shadow:
+    0 0 0.6rem rgba(255, 255, 255, 0.5),
+    0 0 1.4rem rgba(255, 255, 255, 0.2);
+}
+
+.pf-back {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.pf-back:hover,
+.pf-back:focus-visible {
+  color: var(--text-strong);
+}
+
+/* ── Rows ──────────────────────────────────────────────────────── */
+
+.pf-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(100%, 76rem);
+  margin: 0 auto;
+  padding: 3rem clamp(1.5rem, 4vw, 3rem) 4rem;
+}
+
+.pf-rows {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.pf-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.pf-row-line {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(9rem, 14rem) minmax(0, 1fr) auto 3.4rem;
+  align-items: baseline;
+  gap: 1.4rem;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 1.15rem 0.2rem;
+  color: var(--muted);
+  text-align: left;
+  cursor: default;
+  transition: color 200ms ease;
+}
+
+.pf-row.has-dest .pf-row-line {
+  cursor: pointer;
+}
+
+.pf-row-line:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.pf-row-index {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+.pf-row-client {
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 200ms ease, text-shadow 200ms ease;
+}
+
+.pf-row-title {
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-row-role {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  justify-self: end;
+}
+
+.pf-row-year {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  justify-self: end;
+}
+
+.pf-row.is-open .pf-row-line {
+  color: var(--text);
+}
+
+.pf-row.is-open .pf-row-client {
+  color: var(--text-strong);
+  text-shadow:
+    0 0 0.7rem rgba(255, 255, 255, 0.45),
+    0 0 1.8rem rgba(255, 255, 255, 0.2);
+}
+
+/* Expandable body */
+.pf-row-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.pf-row.is-open .pf-row-body {
+  grid-template-rows: 1fr;
+}
+
+.pf-row-inner {
+  overflow: hidden;
+  min-height: 0;
+  padding-left: 3.6rem;
+}
+
+.pf-row-media {
+  display: none;
+}
+
+.pf-row-blurb {
+  margin: 0.2rem 0 0.9rem;
+  max-width: 42rem;
+  color: var(--text);
+  font-size: 0.82rem;
+  line-height: 1.85;
+}
+
+.pf-row-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-row-tags li {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 99px;
+  padding: 0.28rem 0.7rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pf-row-open {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  color: var(--text-strong);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.7rem rgba(255, 255, 255, 0.35);
+}
+
+/* ── Password gate ─────────────────────────────────────────────── */
+
+.pf-gate {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem;
+  min-height: 100svh;
+}
+
+.pf-gate-home {
+  position: absolute;
+  top: 1.6rem;
+  left: clamp(1.5rem, 4vw, 3rem);
+  color: var(--text-strong);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.pf-gate-form {
+  width: min(100%, 24rem);
+  text-align: center;
+}
+
+.pf-gate-label {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.pf-gate-form h1 {
+  margin: 0 0 2rem;
+  color: var(--text-strong);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pf-gate-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.pf-gate-row input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.65rem;
+  background: #101010;
+  padding: 0.85rem 1rem;
+  color: var(--text-strong);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+
+.pf-gate-row input:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.pf-gate-row button {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.65rem;
+  background: #101010;
+  padding: 0 1.2rem;
+  color: var(--text-strong);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.1);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.pf-gate-row button:hover:not(:disabled),
+.pf-gate-row button:focus-visible {
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.pf-gate-row button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pf-gate-error {
+  margin: 1rem 0 0;
+  color: #ff8a8a;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+
+.pf-gate-hint {
+  margin: 2.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.8;
+}
+
+.pf-gate-hint a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+/* ── Case study ────────────────────────────────────────────────── */
+
+.pf-case {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 50rem);
+  margin: 0 auto;
+  padding: 2rem clamp(1.5rem, 4vw, 3rem) 5rem;
+}
+
+.pf-case-hero {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  margin-bottom: 2.4rem;
+  background: #101010;
+}
+
+.pf-case-hero video,
+.pf-case-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pf-case-client {
+  margin: 0 0 0.6rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.pf-case-title {
+  margin: 0 0 0.8rem;
+  color: var(--text-strong);
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.pf-case-meta {
+  margin: 0 0 1.2rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pf-case-tags {
+  margin-bottom: 2.2rem;
+}
+
+.pf-case-body p {
+  margin: 0 0 1.4rem;
+  color: var(--text);
+  font-size: 0.88rem;
+  line-height: 2;
+}
+
+.pf-case-intro {
+  color: var(--text-strong) !important;
+  font-size: 1.02rem !important;
+}
+
+.pf-case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.65rem;
+  background: #101010;
+  padding: 0.85rem 1.3rem;
+  color: var(--text-strong);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.1);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.pf-case-link:hover,
+.pf-case-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.pf-case-missing {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  color: var(--text);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────── */
+
+@media (hover: none), (max-width: 640px) {
+  .pf-backdrop {
+    display: none;
+  }
+
+  .pf-row-media {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.75rem;
+    margin: 0.4rem 0 1rem;
+    background: #101010;
+  }
+
+  .pf-row-media video,
+  .pf-row-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 640px) {
+  .pf-row-line {
+    grid-template-columns: 1.8rem minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    padding: 1.05rem 0.1rem;
+  }
+
+  .pf-row-title {
+    grid-column: 2 / 3;
+    grid-row: 2;
+    white-space: normal;
+  }
+
+  .pf-row-role {
+    display: none;
+  }
+
+  .pf-row-year {
+    grid-column: 3;
+  }
+
+  .pf-row-inner {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-backdrop video,
+  .pf-backdrop img {
+    animation: none;
+    opacity: 1;
+  }
+
+  .pf-row-body {
+    transition: none;
+  }
+}

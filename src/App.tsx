@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './App.css'
 
 type SocialLink = {
@@ -435,6 +436,10 @@ function WorkSection() {
           </article>
         ))}
       </div>
+
+      <Link className="work-portfolio-link" to="/portfolio">
+        View full portfolio <span aria-hidden="true">→</span>
+      </Link>
 
       {modalProject && (
         <div
