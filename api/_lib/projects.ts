@@ -62,7 +62,7 @@ export const projects: PortfolioProject[] = [
     category: 'experiential',
     tags: ['Experiential', 'Installation', 'Art', 'Event Production'],
     role: 'Producer',
-    year: '2024',
+    year: '2023',
     blurb:
       'A gallery-style art show in Mexico City built around BenQ display hardware and local artists.',
     media: {
@@ -86,7 +86,7 @@ export const projects: PortfolioProject[] = [
     category: 'experiential',
     tags: ['Experiential', 'Projection', 'Branded Experience', 'Creative Technology'],
     role: 'Producer',
-    year: '2023',
+    year: '2025',
     blurb:
       'A projection-driven brand experience connecting Reddit communities across cities.',
     caseStudy: {
@@ -106,7 +106,7 @@ export const projects: PortfolioProject[] = [
     category: 'experiential',
     tags: ['Experiential', 'Branded Activation', 'Sports', 'Event Production'],
     role: 'Producer',
-    year: '2023',
+    year: '2025',
     blurb:
       'A branded activation for Chobani built around Alianza soccer — live event production at field scale.',
     caseStudy: {
@@ -126,7 +126,7 @@ export const projects: PortfolioProject[] = [
     category: 'experiential',
     tags: ['Experiential', 'Installation', 'Large Format', 'Production', 'Fabrication'],
     role: 'Producer',
-    year: '2022',
+    year: '2026',
     blurb:
       'The Volvo Cars Safety Standard hung at architectural scale in Toronto’s Eaton Centre — banners, rigging and crash-tested vehicles on the floor below.',
     media: { image: '/volvo/volvo-atrium.jpg' },
@@ -155,7 +155,7 @@ export const projects: PortfolioProject[] = [
     category: 'content',
     tags: ['Video', 'Branded Content', 'Production', 'Live Action'],
     role: 'Producer — Block Inc.',
-    year: '2023',
+    year: '2026',
     blurb:
       'Brand and web video for Square — concept through shoot, edit and delivery.',
     media: {
@@ -179,7 +179,7 @@ export const projects: PortfolioProject[] = [
     category: 'content',
     tags: ['Video', 'Branded Content', 'Marketing'],
     role: 'Producer',
-    year: '2022',
+    year: '2026',
     blurb: 'Branded marketing video for Ambition.',
   },
   {
@@ -258,7 +258,7 @@ export const projects: PortfolioProject[] = [
     category: 'content',
     tags: ['AI', 'Generative Media', 'Virtual Character', 'Content Experiment'],
     role: 'Creator',
-    year: '2025',
+    year: '2026',
     blurb:
       'A generative-media experiment: a consistent synthetic character performing across formats — native-audio generation with an ElevenLabs voice clone for vocal consistency.',
     media: {
@@ -329,7 +329,7 @@ export const projects: PortfolioProject[] = [
     category: 'interactive',
     tags: ['Interactive', 'VR', 'Gaming', 'Live Product'],
     role: 'Senior Producer — Lucky VR',
-    year: '2024',
+    year: '2025',
     blurb:
       'The live social-casino world by PokerStars — I lead cross-functional teams building its avatar system.',
     media: {
