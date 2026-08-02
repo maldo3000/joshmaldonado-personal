@@ -108,13 +108,21 @@ export const projects: PortfolioProject[] = [
     role: 'Producer',
     year: '2025',
     blurb:
-      'A branded activation for Chobani built around Alianza soccer — live event production at field scale.',
+      'A touring Chobani footprint built around soccer — modular canopy, skills challenge and sampling carts, dropped into match days and street festivals.',
+    media: { image: '/chobani/chobani-goal.jpg' },
+    gallery: [
+      '/chobani/chobani-goal.jpg',
+      '/chobani/chobani-street.jpg',
+      '/chobani/chobani-skills.jpg',
+      '/chobani/chobani-carts.jpg',
+      '/chobani/chobani-crowd.jpg',
+    ],
     caseStudy: {
       intro:
-        'Chobani came to the pitch — a branded experience produced around Alianza de Futbol events.',
+        'Chobani came to the pitch — a footprint that had to read as a destination from across a parking lot, then pack down and do it again in the next market.',
       body: [
-        'I produced the on-site activation: build-out, staffing, run-of-show and the brand moments woven through match days.',
-        'The activation put the brand inside the ritual of game day rather than beside it, meeting fans at field level.',
+        'I produced the activation build and its tour: modular branded canopies, a “Gooooooal” wall and skills challenge clocked by a speed radar, sampling carts, and turf laid over asphalt to turn a lot into a field. Everything was designed to break down, travel and rebuild on a run-of-show.',
+        'The same kit flexed to its setting — a full pitch-side build on match days, a compact street-festival footprint elsewhere — so the brand met fans inside the ritual of game day rather than beside it.',
       ],
     },
   },

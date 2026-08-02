@@ -83,7 +83,9 @@ export default function CaseStudyPage() {
                 onClick={() => setLightbox(i)}
                 aria-label={`Expand image ${i + 1} of ${gallery.length}`}
               >
-                <img src={src} alt="" loading="lazy" />
+                {/* Not lazy: the gallery is this page's lead visual, and an
+                    unloaded auto-height image collapses to nothing. */}
+                <img src={src} alt="" />
               </button>
             ))}
           </div>

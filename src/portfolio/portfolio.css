@@ -397,21 +397,24 @@
   object-fit: cover;
 }
 
-/* Portrait stills — sized to stay tall rather than crop to a wide hero */
+/* Masonry columns rather than fixed tiles, so portrait and landscape
+   stills can sit together without either being cropped. */
 .pf-case-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
-  gap: 0.7rem;
+  columns: 3;
+  column-gap: 0.7rem;
   margin-bottom: 2.4rem;
 }
 
 .pf-case-gallery button {
   display: block;
+  width: 100%;
   padding: 0;
+  margin: 0 0 0.7rem;
   border: none;
   background: none;
   cursor: zoom-in;
   border-radius: 0.75rem;
+  break-inside: avoid;
 }
 
 .pf-case-gallery button:focus-visible {
@@ -422,8 +425,7 @@
 .pf-case-gallery img {
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
+  height: auto;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.75rem;
   background: #101010;
@@ -680,6 +682,10 @@
 
   .pf-row-inner {
     padding-left: 0;
+  }
+
+  .pf-case-gallery {
+    columns: 2;
   }
 }
 
