@@ -57,23 +57,23 @@ export const projects: PortfolioProject[] = [
   {
     slug: 'benq-cdmx-art-show',
     client: 'BenQ',
-    title: 'CDMX Art Show',
+    title: 'Armonia CDMX Art Show',
     kind: 'INSTALLATION',
     category: 'experiential',
     tags: ['Experiential', 'Installation', 'Art', 'Event Production'],
     role: 'Producer',
     year: '2023',
     blurb:
-      'A gallery-style art show in Mexico City built around BenQ display hardware and local artists.',
+      'Armonia — a gallery-style art show in Mexico City built around BenQ display hardware and local artists.',
     media: {
       video: '/videos/benq-armonia-preview.mp4',
       poster: '/videos/benq-armonia-poster.jpg',
     },
     caseStudy: {
       intro:
-        'BenQ needed its displays to be seen the way artists see them — as canvases, not monitors.',
+        'BenQ needed its displays to be seen the way artists see them — as canvases, not monitors. Armonia was the answer.',
       body: [
-        'I produced an art show in Mexico City that paired local artists with BenQ hardware, handling venue production, artist coordination, and the technical direction of the exhibition build.',
+        'I produced Armonia, an art show in Mexico City pairing local artists with BenQ hardware — venue production, artist coordination, and the technical direction of the exhibition build.',
         'The show framed color-accurate displays as part of the work itself, giving the brand a presence in the CDMX creative scene that a product demo never could.',
       ],
     },

@@ -135,11 +135,33 @@ export default function PortfolioPage() {
             return (
               <article
                 key={p.slug}
-                className={`pf-row${expanded ? ' is-open' : ''}${dest ? ' has-dest' : ''}`}
+                className={`pf-row${expanded ? ' is-open' : ''}${dest ? ' has-dest' : ''}${p.media ? ' has-media' : ''}`}
                 onMouseEnter={() => {
                   if (!isTouchLayout()) setActiveSlug(p.slug)
                 }}
               >
+                {/* Sits outside pf-row-body (which clips for the collapse
+                    animation) so it can back the whole row on mobile. Only
+                    mounted while open — 16 videos at once is a lot to ask. */}
+                {p.media && expanded && (
+                  <div className="pf-row-media" aria-hidden="true">
+                    {p.media.video ? (
+                      <video
+                        src={p.media.video}
+                        poster={p.media.poster}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        onCanPlay={(e) => {
+                          void e.currentTarget.play().catch(() => {})
+                        }}
+                      />
+                    ) : p.media.image ? (
+                      <img src={p.media.image} alt="" />
+                    ) : null}
+                  </div>
+                )}
                 <button
                   type="button"
                   className="pf-row-line"
@@ -165,22 +187,7 @@ export default function PortfolioPage() {
                 </button>
                 <div className="pf-row-body">
                   <div className="pf-row-inner">
-                    {p.media && (
-                      <div className="pf-row-media" aria-hidden="true">
-                        {p.media.video ? (
-                          <video
-                            src={p.media.video}
-                            poster={p.media.poster}
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                          />
-                        ) : p.media.image ? (
-                          <img src={p.media.image} alt="" />
-                        ) : null}
-                      </div>
-                    )}
+                    <div className="pf-row-panel">
                     <p className="pf-row-blurb">{p.blurb}</p>
                     <ul className="pf-row-tags" aria-label="Tags">
                       {p.tags.map((t) => (
@@ -194,6 +201,7 @@ export default function PortfolioPage() {
                           : 'Visit project ↗'}
                       </span>
                     )}
+                    </div>
                   </div>
                 </div>
               </article>

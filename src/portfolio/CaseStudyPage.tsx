@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PasswordGate from './PasswordGate'
 import { usePortfolio } from './usePortfolio'
@@ -7,14 +7,33 @@ import './portfolio.css'
 export default function CaseStudyPage() {
   const { slug } = useParams()
   const { state, data, error, login } = usePortfolio()
+  const [lightbox, setLightbox] = useState<number | null>(null)
 
   const project = data?.projects.find((p) => p.slug === slug) ?? null
+  const gallery = project?.gallery
 
   useEffect(() => {
     document.title = project
       ? `${project.client} — ${project.title} — Josh Maldonado`
       : 'Portfolio — Josh Maldonado'
   }, [project])
+
+  useEffect(() => {
+    if (lightbox === null || !gallery) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLightbox(null)
+      if (event.key === 'ArrowRight')
+        setLightbox((i) => ((i ?? 0) + 1) % gallery.length)
+      if (event.key === 'ArrowLeft')
+        setLightbox((i) => ((i ?? 0) - 1 + gallery.length) % gallery.length)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox, gallery])
 
   if (state === 'checking') {
     return <div className="pf-shell pf-loading" aria-busy="true" />
@@ -55,10 +74,17 @@ export default function CaseStudyPage() {
       <main className="pf-case">
         {/* A gallery stands in for the hero — these stills are portrait and a
             16:9 hero crop would cut the subject out. */}
-        {project.gallery ? (
+        {gallery ? (
           <div className="pf-case-gallery">
-            {project.gallery.map((src) => (
-              <img key={src} src={src} alt="" loading="lazy" />
+            {gallery.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setLightbox(i)}
+                aria-label={`Expand image ${i + 1} of ${gallery.length}`}
+              >
+                <img src={src} alt="" loading="lazy" />
+              </button>
             ))}
           </div>
         ) : (
@@ -116,6 +142,35 @@ export default function CaseStudyPage() {
           </a>
         )}
       </main>
+
+      {gallery && lightbox !== null && (
+        <div
+          className="pf-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Expanded image"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            type="button"
+            className="pf-lightbox-close"
+            onClick={() => setLightbox(null)}
+            aria-label="Close image"
+          >
+            ✕
+          </button>
+          <img
+            src={gallery[lightbox]}
+            alt=""
+            onClick={(e) => e.stopPropagation()}
+          />
+          {gallery.length > 1 && (
+            <p className="pf-lightbox-count">
+              {lightbox + 1} / {gallery.length}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   )
 }

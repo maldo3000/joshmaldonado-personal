@@ -61,6 +61,9 @@ function portfolioDevApi(): Plugin {
 
       server.middlewares.use('/api/portfolio/data', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
+        // Match the production function, and keep edits to the project data
+        // from being masked by a cached dev response.
+        res.setHeader('Cache-Control', 'private, no-store')
         const cookies = parseCookies(req.headers.cookie)
         if (!tokenIsValid(cookies[COOKIE_NAME])) {
           res.statusCode = 401

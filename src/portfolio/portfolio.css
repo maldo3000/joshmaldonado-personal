@@ -405,6 +405,20 @@
   margin-bottom: 2.4rem;
 }
 
+.pf-case-gallery button {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  border-radius: 0.75rem;
+}
+
+.pf-case-gallery button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 3px;
+}
+
 .pf-case-gallery img {
   display: block;
   width: 100%;
@@ -413,6 +427,77 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.75rem;
   background: #101010;
+  transition:
+    transform 320ms cubic-bezier(0.33, 1, 0.68, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.pf-case-gallery button:hover img,
+.pf-case-gallery button:focus-visible img {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.14);
+}
+
+/* Expanded image */
+.pf-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background: rgba(6, 6, 6, 0.93);
+  cursor: zoom-out;
+  animation: pf-fade-in 200ms ease forwards;
+}
+
+@keyframes pf-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.pf-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+  cursor: default;
+}
+
+.pf-lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 99px;
+  background: rgba(16, 16, 16, 0.8);
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 180ms ease;
+}
+
+.pf-lightbox-close:hover,
+.pf-lightbox-close:focus-visible {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.pf-lightbox-count {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
 }
 
 .pf-case-client {
@@ -492,18 +577,24 @@
 /* ── Mobile ────────────────────────────────────────────────────── */
 
 @media (hover: none), (max-width: 640px) {
+  /* No hover here, so the expanded row carries its own media: the video
+     fills the panel and the copy sits over it. */
   .pf-backdrop {
     display: none;
   }
 
+  /* Open row: media backs the whole thing, hairline to hairline, with the
+     index, client, title and copy all riding on top of it. */
+  .pf-row.has-media.is-open {
+    position: relative;
+    overflow: hidden;
+  }
+
   .pf-row-media {
     display: block;
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 0.75rem;
-    margin: 0.4rem 0 1rem;
-    background: #101010;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
   .pf-row-media video,
@@ -512,6 +603,57 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.45) saturate(0.85);
+  }
+
+  /* Tint for legibility — heaviest low, where the copy sits */
+  .pf-row-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 10, 0.9),
+      rgba(10, 10, 10, 0.78) 55%,
+      rgba(10, 10, 10, 0.62)
+    );
+  }
+
+  .pf-row.has-media.is-open .pf-row-line,
+  .pf-row.has-media.is-open .pf-row-body {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pf-row.has-media .pf-row-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 8.5rem;
+    padding: 0 0.1rem;
+  }
+
+  .pf-row.has-media.is-open .pf-row-title,
+  .pf-row.has-media.is-open .pf-row-index,
+  .pf-row.has-media.is-open .pf-row-year {
+    color: var(--text);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+  }
+
+  .pf-row.has-media .pf-row-blurb {
+    color: var(--text-strong);
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.95);
+  }
+
+  .pf-row.has-media .pf-row-tags li {
+    border-color: rgba(255, 255, 255, 0.34);
+    background: rgba(10, 10, 10, 0.55);
+    color: var(--text-strong);
+  }
+
+  .pf-row.has-media .pf-row-open {
+    margin-bottom: 1.1rem;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.95);
   }
 }
 
