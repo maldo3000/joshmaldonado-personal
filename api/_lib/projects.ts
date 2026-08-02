@@ -241,13 +241,22 @@ export const projects: PortfolioProject[] = [
     role: 'Producer',
     year: '2025',
     blurb:
-      'Programmatic product demo videos for Reddit — a Remotion pipeline that turns product flows into finished cuts.',
+      'Static PDF decks turned into a library of motion pieces for an Arcadia Earth activation — a programmatic pipeline built to beat an impossible turnaround.',
+    media: {
+      video: '/videos/reddit-demos-preview.mp4',
+      poster: '/videos/reddit-demos-poster.jpg',
+    },
+    feature: {
+      video: '/videos/reddit-demos.mp4',
+      poster: '/videos/reddit-demos-poster.jpg',
+      orientation: 'horizontal',
+    },
     caseStudy: {
       intro:
-        'Product demos age the moment the UI changes. For Reddit, the fix was a demo pipeline that re-renders instead of re-shoots.',
+        'The brief arrived as PDF presentations and had to leave as motion — in every size the Arcadia Earth activation called for, on a timeline that ruled out animating them one at a time.',
       body: [
-        'I produced a Remotion-based system for Reddit product demo videos: screens, motion and narrative beats defined in code, so every product update meant a re-render rather than a new edit.',
-        'AI-assisted generation handled variants and localization, keeping a growing library of demos current without a growing production bill.',
+        'Rather than treat each deck as a separate edit, I built the work as a system. A programmatic video library made the layouts code instead of timelines, and an agentic workflow using Claude did the groundwork of pulling the brand’s assets out of those static PDFs and standardizing them into components the pipeline could compose.',
+        'Once that foundation existed, volume stopped being the constraint. Every new format was a render rather than a rebuild, so the activation got a full library of correctly-sized videos in the window a handful of hand-animated cuts would have taken.',
       ],
     },
   },
