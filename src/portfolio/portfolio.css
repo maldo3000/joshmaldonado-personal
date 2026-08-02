@@ -400,13 +400,101 @@
 /* Filmstrip: one scrollable row, uniform height and natural widths, so
    portrait and landscape sit together with nothing cropped. Same on every
    breakpoint. Click any still to enlarge. */
+.pf-case-strip {
+  position: relative;
+  margin-bottom: 2.4rem;
+}
+
+/* Softens the hard cut at either end, so the strip reads as continuing
+   rather than clipped. Only on the side that has more to show. */
+.pf-case-strip::before,
+.pf-case-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0.7rem;
+  width: 3.5rem;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.pf-case-strip::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--page-background),
+    transparent
+  );
+}
+
+.pf-case-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--page-background), transparent);
+}
+
+.pf-case-strip.can-left::before,
+.pf-case-strip.can-right::after {
+  opacity: 1;
+}
+
+/* Quiet until you go looking for it */
+.pf-strip-nav {
+  position: absolute;
+  top: calc(50% - 0.35rem);
+  transform: translateY(-50%);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 99px;
+  background: rgba(10, 10, 10, 0.7);
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 260ms ease,
+    visibility 260ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 220ms ease;
+}
+
+.pf-case-strip.can-left .pf-strip-nav--left,
+.pf-case-strip.can-right .pf-strip-nav--right {
+  opacity: 0.34;
+  visibility: visible;
+}
+
+.pf-strip-nav:hover,
+.pf-strip-nav:focus-visible {
+  opacity: 1 !important;
+  color: var(--text-strong);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.28);
+}
+
+.pf-strip-nav--left {
+  left: 0.5rem;
+}
+
+.pf-strip-nav--right {
+  right: 0.5rem;
+}
+
 .pf-case-gallery {
   display: flex;
   gap: 0.6rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  margin-bottom: 2.4rem;
   padding-bottom: 0.7rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;

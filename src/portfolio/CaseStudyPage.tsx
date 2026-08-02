@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PasswordGate from './PasswordGate'
 import { usePortfolio } from './usePortfolio'
@@ -8,6 +8,26 @@ export default function CaseStudyPage() {
   const { slug } = useParams()
   const { state, data, error, login } = usePortfolio()
   const [lightbox, setLightbox] = useState<number | null>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
+  const [canScroll, setCanScroll] = useState({ left: false, right: false })
+
+  // Only hint in a direction that actually has more to show.
+  const syncScrollHints = useCallback(() => {
+    const el = stripRef.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    setCanScroll({ left: el.scrollLeft > 4, right: el.scrollLeft < max - 4 })
+  }, [])
+
+  const nudgeStrip = (direction: 1 | -1) => {
+    const el = stripRef.current
+    if (!el) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollBy({
+      left: direction * el.clientWidth * 0.8,
+      behavior: reduced ? 'auto' : 'smooth',
+    })
+  }
 
   const project = data?.projects.find((p) => p.slug === slug) ?? null
   const gallery = project?.gallery
@@ -34,6 +54,18 @@ export default function CaseStudyPage() {
       document.body.style.overflow = ''
     }
   }, [lightbox, gallery])
+
+  useEffect(() => {
+    const el = stripRef.current
+    if (!el) return
+    syncScrollHints()
+    el.addEventListener('scroll', syncScrollHints, { passive: true })
+    window.addEventListener('resize', syncScrollHints)
+    return () => {
+      el.removeEventListener('scroll', syncScrollHints)
+      window.removeEventListener('resize', syncScrollHints)
+    }
+  }, [syncScrollHints, gallery])
 
   if (state === 'checking') {
     return <div className="pf-shell pf-loading" aria-busy="true" />
@@ -87,19 +119,41 @@ export default function CaseStudyPage() {
             />
           </div>
         ) : gallery ? (
-          <div className="pf-case-gallery">
-            {gallery.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                onClick={() => setLightbox(i)}
-                aria-label={`Expand image ${i + 1} of ${gallery.length}`}
-              >
-                {/* Not lazy: the gallery is this page's lead visual, and an
-                    unloaded auto-height image collapses to nothing. */}
-                <img src={src} alt="" />
-              </button>
-            ))}
+          <div
+            className={`pf-case-strip${canScroll.left ? ' can-left' : ''}${canScroll.right ? ' can-right' : ''}`}
+          >
+            <div className="pf-case-gallery" ref={stripRef}>
+              {gallery.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setLightbox(i)}
+                  aria-label={`Expand image ${i + 1} of ${gallery.length}`}
+                >
+                  {/* Not lazy: the gallery is this page's lead visual, and an
+                      unloaded auto-height image collapses to nothing. */}
+                  <img src={src} alt="" onLoad={syncScrollHints} />
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="pf-strip-nav pf-strip-nav--left"
+              onClick={() => nudgeStrip(-1)}
+              aria-label="Scroll images left"
+              tabIndex={canScroll.left ? 0 : -1}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="pf-strip-nav pf-strip-nav--right"
+              onClick={() => nudgeStrip(1)}
+              aria-label="Scroll images right"
+              tabIndex={canScroll.right ? 0 : -1}
+            >
+              ›
+            </button>
           </div>
         ) : (
           project.media && (
