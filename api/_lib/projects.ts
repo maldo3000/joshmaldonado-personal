@@ -16,6 +16,14 @@ export type PortfolioProject = {
   media?: { video?: string; image?: string; poster?: string }
   /** Extra stills shown as a grid on the case-study page */
   gallery?: string[]
+  /** Full cut with sound, played with controls on the case-study page */
+  feature?: {
+    video: string
+    poster?: string
+    orientation?: 'vertical' | 'horizontal'
+  }
+  /** Tool-by-tool build breakdown, listed under the case study */
+  workflow?: { tool: string; description: string }[]
   /** External destination — used when there is no case-study page */
   externalUrl?: string
   /** Present → row opens /portfolio/p/:slug */
@@ -237,42 +245,106 @@ export const projects: PortfolioProject[] = [
   {
     slug: 'ctrlshift-brand-content',
     client: 'CTRL+SHIFT',
-    title: 'Brand Content Demo',
-    kind: 'BRANDED CONTENT',
+    title: 'Doing It Right',
+    kind: 'AI IN BRAND MARKETING',
     category: 'content',
-    tags: ['Video', 'Branded Content', 'Marketing'],
+    tags: ['Video', 'AI', 'Branded Content', 'Generative Media', 'Marketing'],
     role: 'Founder / Producer',
     year: '2026',
     blurb:
-      'Brand content for CTRL+SHIFT — the creative-tech community I’m building in Toronto.',
+      'A comprehensive look at integrating AI into modern marketing stacks without losing the human touch — cinematic product storytelling, start to finish.',
     media: {
       video: '/videos/ctrlshift-demo-preview.mp4',
       poster: '/videos/ctrlshift-demo-poster.jpg',
     },
+    feature: {
+      video: '/videos/ctrlshift-demo.mp4',
+      poster: '/videos/ctrlshift-demo-poster.jpg',
+      orientation: 'horizontal',
+    },
     caseStudy: {
       intro:
-        'CTRL+SHIFT is my own brand — a Toronto community for curious, future-minded creatives — and its content is produced in-house.',
+        'Doing It Right: AI in Product & Brand Marketing — a comprehensive look at integrating AI into modern marketing stacks without losing the human touch.',
       body: [
-        'I produce the brand’s content system end to end: event films, social cuts and the visual identity that carries a packed-room feeling onto a feed.',
-        'It doubles as a lab — formats and pipelines get tested on CTRL+SHIFT first, then graduate into client work.',
+        'The piece demonstrates cinematic product storytelling built with a generative stack end to end, from script through finishing, with a human edit holding the through-line.',
+        'It doubles as a lab for CTRL+SHIFT, the creative-tech community I run in Toronto — formats and pipelines get tested on our own brand first, then graduate into client work.',
       ],
     },
+    workflow: [
+      {
+        tool: 'ChatGPT',
+        description: 'Script development — the narrative arc and dialogue.',
+      },
+      {
+        tool: 'ChatGPT & Midjourney',
+        description: 'Key visuals — initial keyframes and stylistic reference.',
+      },
+      {
+        tool: 'Gemini (NanoBanana)',
+        description:
+          'Character consistency — character sheets and auxiliary shots.',
+      },
+      {
+        tool: 'Claude Code',
+        description:
+          'Asset management — automated file naming, folder structure and cleanup scripts.',
+      },
+      {
+        tool: 'Kling & CapCut',
+        description:
+          'Production and assembly — cinematic scenes generated in Kling, edit finalized in CapCut.',
+      },
+      {
+        tool: 'Topaz Labs',
+        description: 'Finishing — AI upscaling and final visual pass.',
+      },
+    ],
   },
   {
     slug: 'synthetic-character',
     client: 'R&D',
-    title: 'Synthetic Character Experiment',
+    title: 'AI Influencer Case Study',
     kind: 'AI EXPERIMENT',
     category: 'content',
     tags: ['AI', 'Generative Media', 'Virtual Character', 'Content Experiment'],
     role: 'Creator',
     year: '2026',
     blurb:
-      'A generative-media experiment: a consistent synthetic character performing across formats — native-audio generation with an ElevenLabs voice clone for vocal consistency.',
+      'An exploration of the synthetic persona phenomenon — how consistent character identity holds up across short-form content made with generative AI.',
     media: {
       video: '/videos/synthetic-character-preview.mp4',
       poster: '/videos/synthetic-character-poster.jpg',
     },
+    feature: {
+      video: '/videos/synthetic-character.mp4',
+      poster: '/videos/synthetic-character-poster.jpg',
+      orientation: 'vertical',
+    },
+    caseStudy: {
+      intro:
+        'An exploration of the synthetic persona phenomenon: how consistent character identity can be maintained across short-form media content using generative AI to replicate a social media personality.',
+      body: [
+        'The hard part isn’t generating a convincing shot — it’s generating the hundredth one that still looks like the same person, sounds like the same person, and carries the same performance.',
+        'The build leaned on a defined character base, motion generated with native audio under consistency constraints, and a voice clone maintained across every segment.',
+      ],
+    },
+    workflow: [
+      {
+        tool: 'Gemini (NanoBanana)',
+        description:
+          'Character exploration — defined the visual identity and generated character sheets and multiple shots for the persona base.',
+      },
+      {
+        tool: 'Veo 3.1',
+        description:
+          'Video generation — high-fidelity motion clips with native audio, adhering to character consistency constraints.',
+      },
+      {
+        tool: 'ElevenLabs',
+        description:
+          'Vocal consistency — a distinct, emotive voice clone maintained across all video segments.',
+      },
+    ],
   },
 
   // ── INTERACTIVE PRODUCTS & PLATFORMS ────────────────────────────

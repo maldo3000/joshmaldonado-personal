@@ -397,24 +397,38 @@
   object-fit: cover;
 }
 
-/* Masonry columns rather than fixed tiles, so portrait and landscape
-   stills can sit together without either being cropped. */
+/* Mosaic: a feature tile plus supporting tiles, sized to fill a complete
+   block rather than leaving a ragged last row. Stills are cropped to fit —
+   the lightbox shows each one whole. */
 .pf-case-gallery {
-  columns: 3;
-  column-gap: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(5.5rem, 13vw, 9rem);
+  grid-auto-flow: dense;
+  gap: 0.6rem;
   margin-bottom: 2.4rem;
 }
 
 .pf-case-gallery button {
   display: block;
-  width: 100%;
+  min-width: 0;
   padding: 0;
-  margin: 0 0 0.7rem;
+  margin: 0;
   border: none;
   background: none;
   cursor: zoom-in;
   border-radius: 0.75rem;
-  break-inside: avoid;
+}
+
+/* Feature tile */
+.pf-case-gallery button:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* With four stills the last one widens to close the block */
+.pf-case-gallery button:nth-child(4):last-child {
+  grid-column: span 2;
 }
 
 .pf-case-gallery button:focus-visible {
@@ -425,7 +439,8 @@
 .pf-case-gallery img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.75rem;
   background: #101010;
@@ -500,6 +515,92 @@
   color: var(--muted);
   font-size: 0.7rem;
   letter-spacing: 0.24em;
+}
+
+/* Full cut with sound */
+.pf-case-player {
+  margin-bottom: 2.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.pf-case-player video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Vertical cuts get boxed to a sane height instead of running off-screen */
+.pf-case-player--vertical {
+  max-width: min(100%, 24rem);
+  margin-inline: auto;
+}
+
+.pf-case-workflow {
+  margin: 3rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 1.6rem;
+}
+
+.pf-case-workflow-label {
+  margin: 0 0 1.2rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.pf-case-workflow ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-case-workflow li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(7rem, 11rem) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 0.95rem 0.1rem;
+}
+
+.pf-case-workflow li:last-child {
+  border-bottom: none;
+}
+
+.pf-workflow-index {
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+}
+
+.pf-workflow-tool {
+  color: var(--text-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pf-workflow-desc {
+  color: var(--text);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 640px) {
+  .pf-case-workflow li {
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    gap: 0.4rem 0.8rem;
+  }
+
+  .pf-workflow-desc {
+    grid-column: 2;
+  }
 }
 
 .pf-case-client {
@@ -690,7 +791,14 @@
   }
 
   .pf-case-gallery {
-    columns: 2;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(6rem, 30vw, 10rem);
+  }
+
+  /* Feature goes wide rather than tall in two columns */
+  .pf-case-gallery button:first-child {
+    grid-column: span 2;
+    grid-row: span 1;
   }
 }
 

@@ -72,9 +72,21 @@ export default function CaseStudyPage() {
       </header>
 
       <main className="pf-case">
-        {/* A gallery stands in for the hero — these stills are portrait and a
-            16:9 hero crop would cut the subject out. */}
-        {gallery ? (
+        {/* Full cut with sound wins the hero slot; a gallery stands in
+            otherwise, since a 16:9 crop would cut portrait stills apart. */}
+        {project.feature ? (
+          <div
+            className={`pf-case-player pf-case-player--${project.feature.orientation ?? 'horizontal'}`}
+          >
+            <video
+              src={project.feature.video}
+              poster={project.feature.poster}
+              controls
+              playsInline
+              preload="metadata"
+            />
+          </div>
+        ) : gallery ? (
           <div className="pf-case-gallery">
             {gallery.map((src, i) => (
               <button
@@ -131,6 +143,23 @@ export default function CaseStudyPage() {
           <div className="pf-case-body">
             <p className="pf-case-intro">{project.blurb}</p>
           </div>
+        )}
+
+        {project.workflow && (
+          <section className="pf-case-workflow" aria-label="Workflow">
+            <p className="pf-case-workflow-label">How it was built</p>
+            <ol>
+              {project.workflow.map((step, i) => (
+                <li key={step.tool}>
+                  <span className="pf-workflow-index">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="pf-workflow-tool">{step.tool}</span>
+                  <span className="pf-workflow-desc">{step.description}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
         )}
 
         {project.externalUrl && (
