@@ -97,6 +97,15 @@ export const projects: PortfolioProject[] = [
     year: '2025',
     blurb:
       'A projection-driven brand experience connecting Reddit communities across cities.',
+    media: {
+      video: '/videos/reddit-cities-preview.mp4',
+      poster: '/videos/reddit-cities-poster.jpg',
+    },
+    feature: {
+      video: '/videos/reddit-cities.mp4',
+      poster: '/videos/reddit-cities-poster.jpg',
+      orientation: 'horizontal',
+    },
     caseStudy: {
       intro:
         'Reddit is a network of communities — Connected Cities made that literal, linking physical locations through synchronized projection.',
