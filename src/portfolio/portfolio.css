@@ -589,13 +589,18 @@
      index, client, title and copy all riding on top of it. */
   .pf-row.has-media.is-open {
     position: relative;
-    overflow: hidden;
   }
 
+  /* Bleed past the list's side padding to the screen edges. Offsets mirror
+     .pf-main's horizontal padding; the row's own content doesn't move.
+     (No overflow:hidden on the row — it would clip this back in.) */
   .pf-row-media {
     display: block;
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * clamp(1.5rem, 4vw, 3rem));
+    right: calc(-1 * clamp(1.5rem, 4vw, 3rem));
     z-index: 0;
   }
 
