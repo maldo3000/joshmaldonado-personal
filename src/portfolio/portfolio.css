@@ -397,38 +397,41 @@
   object-fit: cover;
 }
 
-/* Mosaic: a feature tile plus supporting tiles, sized to fill a complete
-   block rather than leaving a ragged last row. Stills are cropped to fit —
-   the lightbox shows each one whole. */
+/* Filmstrip: one scrollable row, uniform height and natural widths, so
+   portrait and landscape sit together with nothing cropped. Same on every
+   breakpoint. Click any still to enlarge. */
 .pf-case-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: clamp(5.5rem, 13vw, 9rem);
-  grid-auto-flow: dense;
+  display: flex;
   gap: 0.6rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
   margin-bottom: 2.4rem;
+  padding-bottom: 0.7rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+.pf-case-gallery::-webkit-scrollbar {
+  height: 6px;
+}
+
+.pf-case-gallery::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 99px;
 }
 
 .pf-case-gallery button {
+  flex: 0 0 auto;
   display: block;
-  min-width: 0;
+  height: clamp(13rem, 34vw, 21rem);
   padding: 0;
   margin: 0;
   border: none;
   background: none;
   cursor: zoom-in;
   border-radius: 0.75rem;
-}
-
-/* Feature tile */
-.pf-case-gallery button:first-child {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-/* With four stills the last one widens to close the block */
-.pf-case-gallery button:nth-child(4):last-child {
-  grid-column: span 2;
+  scroll-snap-align: start;
 }
 
 .pf-case-gallery button:focus-visible {
@@ -438,9 +441,8 @@
 
 .pf-case-gallery img {
   display: block;
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: auto;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.75rem;
   background: #101010;
@@ -790,16 +792,6 @@
     padding-left: 0;
   }
 
-  .pf-case-gallery {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: clamp(6rem, 30vw, 10rem);
-  }
-
-  /* Feature goes wide rather than tall in two columns */
-  .pf-case-gallery button:first-child {
-    grid-column: span 2;
-    grid-row: span 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
