@@ -9,6 +9,12 @@ export type NoteBlock =
       orientation?: 'vertical' | 'horizontal'
       caption: string
     }
+  /** Stepped process — tool on one side, what it did on the other */
+  | {
+      type: 'sequence'
+      label: string
+      steps: { tool: string; description: string }[]
+    }
 
 export type Note = {
   slug: string
@@ -50,8 +56,33 @@ export const notes: Note[] = [
         text: 'A branded film about AI in marketing, produced with a fully generative pipeline. The point was to run every stage through the tools and find where it breaks.',
       },
       {
-        type: 'p',
-        text: 'The sequence: script in ChatGPT. Key visuals and style reference through ChatGPT and Midjourney. Character sheets in Gemini to hold faces consistent across shots. Claude Code handling file naming, folder structure and cleanup. Scenes generated in Kling, assembled in CapCut, upscaled and finished in Topaz.',
+        type: 'sequence',
+        label: 'The stack, in order',
+        steps: [
+          { tool: 'ChatGPT', description: 'Script — narrative arc and dialogue.' },
+          {
+            tool: 'ChatGPT + Midjourney',
+            description: 'Key visuals — first keyframes and style reference.',
+          },
+          {
+            tool: 'Gemini',
+            description:
+              'Character sheets, so faces hold across auxiliary shots.',
+          },
+          {
+            tool: 'Claude Code',
+            description:
+              'Asset management — file naming, folder structure, cleanup scripts.',
+          },
+          {
+            tool: 'Kling + CapCut',
+            description: 'Scene generation, then assembly and edit.',
+          },
+          {
+            tool: 'Topaz',
+            description: 'Finishing — upscaling and the final visual pass.',
+          },
+        ],
       },
       {
         type: 'p',
@@ -73,7 +104,28 @@ export const notes: Note[] = [
       },
       {
         type: 'p',
-        text: 'The approach was to define the character before generating any motion. Character sheets in Gemini fixed the visual identity first. Veo 3.1 generated motion with native audio under consistency constraints. ElevenLabs carried a single voice clone across every segment.',
+        text: 'The approach was to define the character before generating any motion, so every later step inherited a fixed identity rather than reinventing one.',
+      },
+      {
+        type: 'sequence',
+        label: 'Locking the character',
+        steps: [
+          {
+            tool: 'Gemini',
+            description:
+              'Character sheets — visual identity fixed before a frame of motion existed.',
+          },
+          {
+            tool: 'Veo 3.1',
+            description:
+              'Motion with native audio, generated under consistency constraints.',
+          },
+          {
+            tool: 'ElevenLabs',
+            description:
+              'A single voice clone carried across every segment.',
+          },
+        ],
       },
       {
         type: 'p',

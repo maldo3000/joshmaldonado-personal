@@ -161,11 +161,23 @@
 
 .nt-article > .nt-eyebrow,
 .nt-article > .nt-title,
-.nt-article > .nt-dek,
-.nt-article > .nt-meta,
+.nt-article > .nt-meta {
+  max-width: 44rem;
+}
+
+.nt-article > .nt-dek {
+  max-width: 40rem;
+}
+
+/* Serif runs narrower than the mono it replaced — same column would
+   push past a comfortable line length. */
 .nt-body > p,
 .nt-body > h2 {
-  max-width: 44rem;
+  max-width: 38rem;
+}
+
+.nt-sequence {
+  max-width: 46rem;
 }
 
 .nt-title {
@@ -180,8 +192,10 @@
 .nt-dek {
   margin: 0 0 1.4rem;
   color: var(--text);
-  font-size: clamp(0.95rem, 2.4vw, 1.1rem);
-  line-height: 1.75;
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.8vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.55;
 }
 
 .nt-meta {
@@ -194,11 +208,16 @@
   text-transform: uppercase;
 }
 
+/* Serif for reading, mono for structure — headings, labels and the
+   brand furniture stay in the site's voice. */
 .nt-body p {
   margin: 0 0 1.5rem;
   color: var(--text);
-  font-size: 0.95rem;
-  line-height: 1.9;
+  font-family: var(--serif);
+  font-size: 1.16rem;
+  font-weight: 300;
+  line-height: 1.72;
+  letter-spacing: 0.005em;
 }
 
 .nt-body h2 {
@@ -212,14 +231,108 @@
 
 /* Pull quote — the line worth stealing from the paragraph */
 .nt-pull {
-  margin: 2.6rem 0 !important;
-  padding-left: 1.4rem;
+  margin: 2.8rem 0 !important;
+  padding-left: 1.5rem;
   border-left: 2px solid rgba(255, 255, 255, 0.35);
   color: var(--text-strong) !important;
-  font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
-  line-height: 1.6 !important;
-  letter-spacing: -0.015em;
-  text-shadow: 0 0 1.4rem rgba(255, 255, 255, 0.18);
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 3.2vw, 1.7rem) !important;
+  font-style: italic;
+  font-weight: 300 !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0;
+  text-shadow: 0 0 1.6rem rgba(255, 255, 255, 0.16);
+}
+
+/* ── Sequence: the process, laid out as steps ──────────────────── */
+
+.nt-sequence {
+  margin: 2.6rem 0 3rem;
+}
+
+.nt-sequence-label {
+  margin: 0 0 1.2rem;
+  color: var(--muted);
+  font-size: 0.64rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.nt-sequence ol {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Rail connecting the steps */
+.nt-sequence ol::before {
+  content: '';
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 0.62rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.18) 12%,
+    rgba(255, 255, 255, 0.18) 88%,
+    transparent
+  );
+}
+
+.nt-sequence li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(7rem, 11rem) minmax(0, 1fr);
+  gap: 0.4rem 1.3rem;
+  align-items: baseline;
+  padding: 0.85rem 0.6rem 0.85rem 0;
+  border-radius: 0.5rem;
+  transition: background 240ms ease;
+}
+
+.nt-sequence li:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+/* Node on the rail */
+.nt-seq-num {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  background: var(--page-background);
+  padding: 0.15rem 0;
+  transition: color 240ms ease, text-shadow 240ms ease;
+}
+
+.nt-sequence li:hover .nt-seq-num {
+  color: var(--text-strong);
+  text-shadow: 0 0 0.8rem rgba(255, 255, 255, 0.5);
+}
+
+.nt-seq-tool {
+  color: var(--text-strong);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: text-shadow 240ms ease;
+}
+
+.nt-sequence li:hover .nt-seq-tool {
+  text-shadow: 0 0 0.9rem rgba(255, 255, 255, 0.4);
+}
+
+.nt-seq-desc {
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 /* Media runs the full frame — wider than the prose it sits between */
@@ -244,7 +357,7 @@
 }
 
 .nt-figure figcaption {
-  max-width: 44rem;
+  max-width: 38rem;
   margin-top: 0.9rem;
   color: var(--muted);
   font-size: 0.72rem;
@@ -282,5 +395,14 @@
   .nt-list-meta {
     grid-column: 2;
     margin-top: 0.7rem;
+  }
+
+  /* Tool stacks above its description rather than beside it */
+  .nt-sequence li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .nt-seq-desc {
+    grid-column: 2;
   }
 }

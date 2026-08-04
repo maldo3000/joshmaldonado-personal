@@ -57,6 +57,24 @@ export default function NotePage() {
                 </p>
               )
             }
+            if (block.type === 'sequence') {
+              return (
+                <section key={i} className="nt-sequence">
+                  <p className="nt-sequence-label">{block.label}</p>
+                  <ol>
+                    {block.steps.map((step, s) => (
+                      <li key={step.tool}>
+                        <span className="nt-seq-num">
+                          {String(s + 1).padStart(2, '0')}
+                        </span>
+                        <span className="nt-seq-tool">{step.tool}</span>
+                        <span className="nt-seq-desc">{step.description}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )
+            }
             if (block.type === 'media') {
               return (
                 <figure
