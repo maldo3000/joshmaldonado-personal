@@ -437,9 +437,14 @@ function WorkSection() {
         ))}
       </div>
 
-      <Link className="work-portfolio-link" to="/portfolio">
-        View full portfolio <span aria-hidden="true">→</span>
-      </Link>
+      <div className="work-links">
+        <Link className="work-portfolio-link" to="/portfolio">
+          View full portfolio <span aria-hidden="true">→</span>
+        </Link>
+        <Link className="work-portfolio-link" to="/notes">
+          Read the notes <span aria-hidden="true">→</span>
+        </Link>
+      </div>
 
       {modalProject && (
         <div

@@ -703,11 +703,17 @@
   line-height: 1.85;
 }
 
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 2.2rem;
+  margin-top: 1.6rem;
+}
+
 .work-portfolio-link {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  margin-top: 1.6rem;
   color: var(--muted);
   font-size: 0.74rem;
   letter-spacing: 0.2em;
