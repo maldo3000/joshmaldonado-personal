@@ -52,7 +52,7 @@
 /* ── Index ─────────────────────────────────────────────────────── */
 
 .nt-index {
-  width: min(100%, 56rem);
+  width: min(100%, 58rem);
   margin: 0 auto;
   padding: 2.5rem clamp(1.5rem, 4vw, 3rem) 5rem;
 }
@@ -151,10 +151,21 @@
 
 /* ── Article ───────────────────────────────────────────────────── */
 
+/* Wide frame so media can run large; prose is held to a readable
+   measure inside it rather than stretching the full width. */
 .nt-article {
-  width: min(100%, 42rem);
+  width: min(100%, 58rem);
   margin: 0 auto;
   padding: 2.5rem clamp(1.5rem, 4vw, 3rem) 5rem;
+}
+
+.nt-article > .nt-eyebrow,
+.nt-article > .nt-title,
+.nt-article > .nt-dek,
+.nt-article > .nt-meta,
+.nt-body > p,
+.nt-body > h2 {
+  max-width: 44rem;
 }
 
 .nt-title {
@@ -184,10 +195,10 @@
 }
 
 .nt-body p {
-  margin: 0 0 1.6rem;
+  margin: 0 0 1.5rem;
   color: var(--text);
-  font-size: 0.92rem;
-  line-height: 2.05;
+  font-size: 0.95rem;
+  line-height: 1.9;
 }
 
 .nt-body h2 {
@@ -211,8 +222,9 @@
   text-shadow: 0 0 1.4rem rgba(255, 255, 255, 0.18);
 }
 
+/* Media runs the full frame — wider than the prose it sits between */
 .nt-figure {
-  margin: 2.8rem 0;
+  margin: 2.6rem 0 3rem;
 }
 
 .nt-figure video {
@@ -222,19 +234,20 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.9rem;
   background: #000;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 44px rgba(0, 0, 0, 0.65);
 }
 
-/* Vertical cuts stay boxed rather than running the full column */
+/* Vertical cuts stay boxed rather than towering over the page */
 .nt-figure--vertical video {
-  max-width: min(100%, 20rem);
+  max-width: min(100%, 22rem);
   margin-inline: auto;
 }
 
 .nt-figure figcaption {
+  max-width: 44rem;
   margin-top: 0.9rem;
   color: var(--muted);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   line-height: 1.7;
   letter-spacing: 0.04em;
 }
