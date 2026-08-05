@@ -25,6 +25,9 @@ export type Note = {
   dek: string
   date: string
   readingTime: string
+  /** Link-preview image — a frame from the piece with the title overlaid.
+   *  Falls back to the site's default card when unset. */
+  ogImage?: string
   blocks: NoteBlock[]
 }
 
@@ -36,6 +39,7 @@ export const notes: Note[] = [
     dek: 'Two experiments and a client deliverable — the tools, the order we used them in, and what held up.',
     date: '2026-08-04',
     readingTime: '4 min',
+    ogImage: '/notes/og/generative-media-in-practice.png',
     blocks: [
       {
         type: 'p',

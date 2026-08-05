@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        position: relative;
+        background: #0c0c0c;
+        font-family: 'Roboto Mono', monospace;
+        color: rgba(246, 245, 239, 0.82);
+      }
+      .frame {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.55) saturate(0.9);
+      }
+      /* Tint for legibility, heaviest low where the title sits */
+      .scrim {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to top, rgba(10, 10, 10, 0.94), rgba(10, 10, 10, 0.35) 55%, rgba(10, 10, 10, 0.55)),
+          radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06), transparent 55%);
+      }
+      .inner {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 84px 66px;
+      }
+      .eyebrow {
+        color: rgba(246, 245, 239, 0.6);
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+      }
+      h1 {
+        max-width: 980px;
+        color: #f6f5ef;
+        font-size: 66px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.06;
+        margin-bottom: 26px;
+        text-shadow: 0 2px 30px rgba(0, 0, 0, 0.85);
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .name {
+        color: #f6f5ef;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        text-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+      }
+      .dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 99px;
+        background: rgba(246, 245, 239, 0.4);
+      }
+      .domain {
+        color: rgba(246, 245, 239, 0.6);
+        font-size: 15px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="frame" src="__FRAME_SRC__" alt="" />
+    <div class="scrim"></div>
+    <div class="inner">
+      <p class="eyebrow">__KIND__</p>
+      <h1>__TITLE__</h1>
+      <div class="footer">
+        <span class="name">Josh Maldonado</span>
+        <span class="dot"></span>
+        <span class="domain">joshmaldonado.com/notes</span>
+      </div>
+    </div>
+  </body>
+</html>

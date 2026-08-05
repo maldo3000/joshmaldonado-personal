@@ -10,6 +10,7 @@ import {
   tokenIsValid,
 } from './api/_lib/auth'
 import { CATEGORY_LABELS, projects } from './api/_lib/projects'
+import { docForPath, isCrawlerRequest } from './src/seo/ogMeta'
 
 /**
  * Dev-only mirror of the Vercel serverless endpoints in /api so the
@@ -76,6 +77,30 @@ function portfolioDevApi(): Plugin {
   }
 }
 
+/**
+ * Dev-only mirror of middleware.ts (the Vercel Edge Middleware that serves
+ * crawlers a server-rendered meta document for /notes routes). Vite's dev
+ * server never runs the real edge middleware, so without this the behavior
+ * is unverifiable until a real deploy — mirroring the same docForPath /
+ * isCrawlerRequest logic lets `curl -A "Slackbot" localhost:5173/notes/...`
+ * prove it locally.
+ */
+function notesOgDevMiddleware(): Plugin {
+  return {
+    name: 'notes-og-dev-middleware',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (!isCrawlerRequest(req.headers['user-agent'])) return next()
+        const pathname = (req.url ?? '').split('?')[0]
+        const doc = docForPath(pathname)
+        if (!doc) return next()
+        res.setHeader('Content-Type', 'text/html; charset=utf-8')
+        res.end(doc)
+      })
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -83,6 +108,6 @@ export default defineConfig(({ mode }) => {
     process.env.PORTFOLIO_PASSWORD = env.PORTFOLIO_PASSWORD
   }
   return {
-    plugins: [react(), portfolioDevApi()],
+    plugins: [react(), portfolioDevApi(), notesOgDevMiddleware()],
   }
 })
