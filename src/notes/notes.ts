@@ -65,7 +65,7 @@ export const notes: Note[] = [
             description: 'Key visuals — first keyframes and style reference.',
           },
           {
-            tool: 'Gemini',
+            tool: 'Gemini + Nano Banana',
             description:
               'Character sheets, so faces hold across auxiliary shots.',
           },
@@ -111,9 +111,9 @@ export const notes: Note[] = [
         label: 'Locking the character',
         steps: [
           {
-            tool: 'Gemini',
+            tool: 'Gemini + Nano Banana',
             description:
-              'Character sheets — visual identity fixed before a frame of motion existed.',
+              'Character sheets — visual identity fixed before a frame of motion existed. This was the step that made character consistency possible at all.',
           },
           {
             tool: 'Veo 3.1',
