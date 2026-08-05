@@ -75,6 +75,30 @@ export default function NotePage() {
                 </section>
               )
             }
+            if (block.type === 'figure') {
+              return (
+                <figure
+                  key={i}
+                  className={`nt-stills nt-stills--${block.images.length} nt-stills--${block.aspect ?? 'portrait'}`}
+                >
+                  <div className="nt-stills-grid">
+                    {block.images.map((src) => (
+                      <img key={src} src={src} alt="" loading="lazy" />
+                    ))}
+                  </div>
+                  {block.caption && <figcaption>{block.caption}</figcaption>}
+                </figure>
+              )
+            }
+            if (block.type === 'list') {
+              return (
+                <ul key={i} className="nt-list-block">
+                  {block.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )
+            }
             if (block.type === 'media') {
               return (
                 <figure

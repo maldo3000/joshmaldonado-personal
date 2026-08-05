@@ -335,6 +335,96 @@
   line-height: 1.6;
 }
 
+/* Stills run the full frame, like the video figures. One image fills the
+   width; a pair or trio splits it. */
+.nt-stills {
+  margin: 2.6rem 0 3rem;
+}
+
+.nt-stills-grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr;
+}
+
+.nt-stills--2 .nt-stills-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.nt-stills--3 .nt-stills-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.nt-stills img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.9rem;
+  background: #101010;
+  box-shadow: 0 0 44px rgba(0, 0, 0, 0.65);
+}
+
+/* Paired stills share a height so the row reads as one band */
+.nt-stills--2.nt-stills--portrait img,
+.nt-stills--3.nt-stills--portrait img {
+  aspect-ratio: 4 / 5;
+}
+
+.nt-stills--2.nt-stills--landscape img,
+.nt-stills--3.nt-stills--landscape img {
+  aspect-ratio: 3 / 2;
+}
+
+.nt-stills figcaption {
+  max-width: 44rem;
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+/* Bulleted list inside the body */
+.nt-list-block {
+  max-width: 38rem;
+  margin: 0 0 1.5rem;
+  padding-left: 1.1rem;
+  list-style: none;
+}
+
+.nt-list-block li {
+  position: relative;
+  margin-bottom: 0.7rem;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.16rem;
+  font-weight: 300;
+  line-height: 1.72;
+}
+
+.nt-list-block li::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.82em;
+  width: 0.32rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 640px) {
+  .nt-stills--2 .nt-stills-grid,
+  .nt-stills--3 .nt-stills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nt-stills img {
+    aspect-ratio: auto !important;
+  }
+}
+
 /* Media runs the full frame — wider than the prose it sits between */
 .nt-figure {
   margin: 2.6rem 0 3rem;
