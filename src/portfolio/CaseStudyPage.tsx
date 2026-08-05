@@ -104,19 +104,25 @@ export default function CaseStudyPage() {
       </header>
 
       <main className="pf-case">
-        {/* Full cut with sound wins the hero slot; a gallery stands in
+        {/* Full cuts with sound win the hero slot; a gallery stands in
             otherwise, since a 16:9 crop would cut portrait stills apart. */}
-        {project.feature ? (
-          <div
-            className={`pf-case-player pf-case-player--${project.feature.orientation ?? 'horizontal'}`}
-          >
-            <video
-              src={project.feature.video}
-              poster={project.feature.poster}
-              controls
-              playsInline
-              preload="metadata"
-            />
+        {project.films?.length ? (
+          <div className="pf-case-films">
+            {project.films.map((film) => (
+              <figure
+                key={film.video}
+                className={`pf-case-player pf-case-player--${film.orientation ?? 'horizontal'}`}
+              >
+                <video
+                  src={film.video}
+                  poster={film.poster}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+                {film.caption && <figcaption>{film.caption}</figcaption>}
+              </figure>
+            ))}
           </div>
         ) : gallery ? (
           <div

@@ -607,20 +607,37 @@
   letter-spacing: 0.24em;
 }
 
-/* Full cut with sound */
-.pf-case-player {
+/* Full cuts with sound — a series stacks them */
+.pf-case-films {
   margin-bottom: 2.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 1rem;
-  overflow: hidden;
-  background: #000;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.pf-case-films .pf-case-player + .pf-case-player {
+  margin-top: 1.6rem;
+}
+
+.pf-case-films figcaption {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+/* Frame sits on the video, not the figure, so a caption reads as a caption
+   rather than as something inside the player. */
+.pf-case-player {
+  margin: 0 0 1rem;
 }
 
 .pf-case-player video {
   display: block;
   width: 100%;
   height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1rem;
+  background: #000;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Vertical cuts get boxed to a sane height instead of running off-screen */

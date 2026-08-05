@@ -154,6 +154,14 @@ export const notes: Note[] = [
         text: 'So the edit became code. Layout, motion and typography were built as Remotion components with the brand expressed as tokens rather than as habits. AI-assisted media filled the frames where it served the story, with a human edit holding the throughline.',
       },
       {
+        type: 'media',
+        video: '/videos/permission-brand-02.mp4',
+        poster: '/videos/permission-brand-02-poster.jpg',
+        orientation: 'horizontal',
+        caption:
+          'A second cut from the same pipeline — different story, same components underneath.',
+      },
+      {
         type: 'p',
         text: 'A new headline or a new aspect ratio is a re-render, not a re-cut. That’s the difference between making a film and building a system — and it only pays when you know more versions are coming.',
       },

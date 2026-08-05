@@ -16,12 +16,15 @@ export type PortfolioProject = {
   media?: { video?: string; image?: string; poster?: string }
   /** Extra stills shown as a grid on the case-study page */
   gallery?: string[]
-  /** Full cut with sound, played with controls on the case-study page */
-  feature?: {
+  /** Full cuts with sound, played with controls on the case-study page.
+   *  A list so a series can show more than one. */
+  films?: {
     video: string
     poster?: string
     orientation?: 'vertical' | 'horizontal'
-  }
+    /** Optional line under the player */
+    caption?: string
+  }[]
   /** Tool-by-tool build breakdown, listed under the case study */
   workflow?: { tool: string; description: string }[]
   /** External destination — used when there is no case-study page */
@@ -101,11 +104,13 @@ export const projects: PortfolioProject[] = [
       video: '/videos/reddit-cities-preview.mp4',
       poster: '/videos/reddit-cities-poster.jpg',
     },
-    feature: {
-      video: '/videos/reddit-cities.mp4',
-      poster: '/videos/reddit-cities-poster.jpg',
-      orientation: 'horizontal',
-    },
+    films: [
+      {
+        video: '/videos/reddit-cities.mp4',
+        poster: '/videos/reddit-cities-poster.jpg',
+        orientation: 'horizontal',
+      },
+    ],
     caseStudy: {
       intro:
         'Reddit is a network of communities — Connected Cities made that literal, linking physical locations through synchronized projection.',
@@ -217,11 +222,38 @@ export const projects: PortfolioProject[] = [
     role: 'Freelance Production',
     year: '2026',
     blurb:
-      'A product video series built on a generative pipeline — Remotion code-driven edit with AI-assisted media.',
+      'A four-part product video series built on a generative pipeline — Remotion code-driven edit with AI-assisted media, including a vertical social cut re-rendered from the same components.',
     media: {
       video: '/videos/permission-brand-preview.mp4',
       poster: '/videos/permission-brand-poster.jpg',
     },
+    films: [
+      {
+        video: '/videos/permission-brand.mp4',
+        poster: '/videos/permission-brand-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'Brand intro.',
+      },
+      {
+        video: '/videos/permission-why-ai.mp4',
+        poster: '/videos/permission-why-ai-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'Why AI for the family.',
+      },
+      {
+        video: '/videos/permission-brand-02.mp4',
+        poster: '/videos/permission-brand-02-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'Get started.',
+      },
+      {
+        video: '/videos/permission-social-cut.mp4',
+        poster: '/videos/permission-social-cut-poster.jpg',
+        orientation: 'vertical',
+        caption:
+          'Social cut — the same components re-rendered vertical for feeds, not re-edited.',
+      },
+    ],
     caseStudy: {
       intro:
         'Permission needed a video series that could iterate at the speed of its product — so the edit became code.',
@@ -246,11 +278,13 @@ export const projects: PortfolioProject[] = [
       video: '/videos/reddit-demos-preview.mp4',
       poster: '/videos/reddit-demos-poster.jpg',
     },
-    feature: {
-      video: '/videos/reddit-demos.mp4',
-      poster: '/videos/reddit-demos-poster.jpg',
-      orientation: 'horizontal',
-    },
+    films: [
+      {
+        video: '/videos/reddit-demos.mp4',
+        poster: '/videos/reddit-demos-poster.jpg',
+        orientation: 'horizontal',
+      },
+    ],
     caseStudy: {
       intro:
         'The brief arrived as PDF presentations and had to leave as motion — in every size the Arcadia Earth activation called for, on a timeline that ruled out animating them one at a time.',
@@ -275,11 +309,13 @@ export const projects: PortfolioProject[] = [
       video: '/videos/ctrlshift-demo-preview.mp4',
       poster: '/videos/ctrlshift-demo-poster.jpg',
     },
-    feature: {
-      video: '/videos/ctrlshift-demo.mp4',
-      poster: '/videos/ctrlshift-demo-poster.jpg',
-      orientation: 'horizontal',
-    },
+    films: [
+      {
+        video: '/videos/ctrlshift-demo.mp4',
+        poster: '/videos/ctrlshift-demo-poster.jpg',
+        orientation: 'horizontal',
+      },
+    ],
     caseStudy: {
       intro:
         'Doing It Right: AI in Product & Brand Marketing — a comprehensive look at integrating AI into modern marketing stacks without losing the human touch.',
@@ -333,11 +369,13 @@ export const projects: PortfolioProject[] = [
       video: '/videos/synthetic-character-preview.mp4',
       poster: '/videos/synthetic-character-poster.jpg',
     },
-    feature: {
-      video: '/videos/synthetic-character.mp4',
-      poster: '/videos/synthetic-character-poster.jpg',
-      orientation: 'vertical',
-    },
+    films: [
+      {
+        video: '/videos/synthetic-character.mp4',
+        poster: '/videos/synthetic-character-poster.jpg',
+        orientation: 'vertical',
+      },
+    ],
     caseStudy: {
       intro:
         'An exploration of the synthetic persona phenomenon: how consistent character identity can be maintained across short-form media content using generative AI to replicate a social media personality.',
