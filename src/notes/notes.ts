@@ -139,8 +139,8 @@ export const notes: Note[] = [
       { type: 'h2', text: 'Client work: make it repeatable' },
       {
         type: 'media',
-        video: '/videos/permission-brand.mp4',
-        poster: '/videos/permission-brand-poster.jpg',
+        video: '/videos/permission-brand-02.mp4',
+        poster: '/videos/permission-brand-02-poster.jpg',
         orientation: 'horizontal',
         caption:
           'Permission — an AI product film series built on a Remotion pipeline, where new versions are renders rather than re-edits.',
@@ -155,8 +155,8 @@ export const notes: Note[] = [
       },
       {
         type: 'media',
-        video: '/videos/permission-brand-02.mp4',
-        poster: '/videos/permission-brand-02-poster.jpg',
+        video: '/videos/permission-brand.mp4',
+        poster: '/videos/permission-brand-poster.jpg',
         orientation: 'horizontal',
         caption:
           'A second cut from the same pipeline — different story, same components underneath.',
