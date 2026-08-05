@@ -31,6 +31,8 @@ export default function CaseStudyPage() {
 
   const project = data?.projects.find((p) => p.slug === slug) ?? null
   const gallery = project?.gallery
+  const films = project?.films ?? []
+  const [leadFilm, ...restFilms] = films
 
   useEffect(() => {
     document.title = project
@@ -104,25 +106,35 @@ export default function CaseStudyPage() {
       </header>
 
       <main className="pf-case">
-        {/* Full cuts with sound win the hero slot; a gallery stands in
-            otherwise, since a 16:9 crop would cut portrait stills apart. */}
-        {project.films?.length ? (
+        <p className="pf-case-client">{project.client}</p>
+        <h1 className="pf-case-title">{project.title}</h1>
+        <p className="pf-case-meta">
+          {project.role}
+          {project.year ? ` · ${project.year}` : ''}
+        </p>
+        <ul className="pf-row-tags pf-case-tags" aria-label="Tags">
+          {project.tags.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+
+        {/* One film leads, the copy follows, the rest of the series sits
+            under it. A gallery stands in when there's no film, since a 16:9
+            crop would cut portrait stills apart. */}
+        {leadFilm ? (
           <div className="pf-case-films">
-            {project.films.map((film) => (
-              <figure
-                key={film.video}
-                className={`pf-case-player pf-case-player--${film.orientation ?? 'horizontal'}`}
-              >
-                <video
-                  src={film.video}
-                  poster={film.poster}
-                  controls
-                  playsInline
-                  preload="metadata"
-                />
-                {film.caption && <figcaption>{film.caption}</figcaption>}
-              </figure>
-            ))}
+            <figure
+              className={`pf-case-player pf-case-player--${leadFilm.orientation ?? 'horizontal'}`}
+            >
+              <video
+                src={leadFilm.video}
+                poster={leadFilm.poster}
+                controls
+                playsInline
+                preload="metadata"
+              />
+              {leadFilm.caption && <figcaption>{leadFilm.caption}</figcaption>}
+            </figure>
           </div>
         ) : gallery ? (
           <div
@@ -180,18 +192,6 @@ export default function CaseStudyPage() {
           )
         )}
 
-        <p className="pf-case-client">{project.client}</p>
-        <h1 className="pf-case-title">{project.title}</h1>
-        <p className="pf-case-meta">
-          {project.role}
-          {project.year ? ` · ${project.year}` : ''}
-        </p>
-        <ul className="pf-row-tags pf-case-tags" aria-label="Tags">
-          {project.tags.map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
-
         {project.caseStudy ? (
           <div className="pf-case-body">
             <p className="pf-case-intro">{project.caseStudy.intro}</p>
@@ -202,6 +202,26 @@ export default function CaseStudyPage() {
         ) : (
           <div className="pf-case-body">
             <p className="pf-case-intro">{project.blurb}</p>
+          </div>
+        )}
+
+        {restFilms.length > 0 && (
+          <div className="pf-case-films pf-case-films--rest">
+            {restFilms.map((film) => (
+              <figure
+                key={film.video}
+                className={`pf-case-player pf-case-player--${film.orientation ?? 'horizontal'}`}
+              >
+                <video
+                  src={film.video}
+                  poster={film.poster}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+                {film.caption && <figcaption>{film.caption}</figcaption>}
+              </figure>
+            ))}
           </div>
         )}
 

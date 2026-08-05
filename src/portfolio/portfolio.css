@@ -612,6 +612,11 @@
   margin-bottom: 2.4rem;
 }
 
+/* The rest of the series, sitting under the copy */
+.pf-case-films--rest {
+  margin-top: 2.6rem;
+}
+
 .pf-case-films .pf-case-player + .pf-case-player {
   margin-top: 1.6rem;
 }
