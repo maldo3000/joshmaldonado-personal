@@ -34,6 +34,46 @@ export default function CaseStudyPage() {
   const films = project?.films ?? []
   const [leadFilm, ...restFilms] = films
 
+  // The strip either leads the page or sits under the copy, so build it
+  // once and place it in whichever slot applies.
+  const galleryStrip = gallery ? (
+    <div
+      className={`pf-case-strip${canScroll.left ? ' can-left' : ''}${canScroll.right ? ' can-right' : ''}`}
+    >
+      <div className="pf-case-gallery" ref={stripRef}>
+        {gallery.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => setLightbox(i)}
+            aria-label={`Expand image ${i + 1} of ${gallery.length}`}
+          >
+            {/* Not lazy: an unloaded auto-height image collapses to nothing */}
+            <img src={src} alt="" onLoad={syncScrollHints} />
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="pf-strip-nav pf-strip-nav--left"
+        onClick={() => nudgeStrip(-1)}
+        aria-label="Scroll images left"
+        tabIndex={canScroll.left ? 0 : -1}
+      >
+        ‹
+      </button>
+      <button
+        type="button"
+        className="pf-strip-nav pf-strip-nav--right"
+        onClick={() => nudgeStrip(1)}
+        aria-label="Scroll images right"
+        tabIndex={canScroll.right ? 0 : -1}
+      >
+        ›
+      </button>
+    </div>
+  ) : null
+
   useEffect(() => {
     document.title = project
       ? `${project.client} — ${project.title} — Josh Maldonado`
@@ -118,9 +158,9 @@ export default function CaseStudyPage() {
           ))}
         </ul>
 
-        {/* One film leads, the copy follows, the rest of the series sits
-            under it. A gallery stands in when there's no film, since a 16:9
-            crop would cut portrait stills apart. */}
+        {/* One film leads, the copy follows, the rest of the series and any
+            stills sit under it. With no film the strip leads instead, since
+            a 16:9 crop would cut portrait stills apart. */}
         {leadFilm ? (
           <div className="pf-case-films">
             <figure
@@ -137,42 +177,7 @@ export default function CaseStudyPage() {
             </figure>
           </div>
         ) : gallery ? (
-          <div
-            className={`pf-case-strip${canScroll.left ? ' can-left' : ''}${canScroll.right ? ' can-right' : ''}`}
-          >
-            <div className="pf-case-gallery" ref={stripRef}>
-              {gallery.map((src, i) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => setLightbox(i)}
-                  aria-label={`Expand image ${i + 1} of ${gallery.length}`}
-                >
-                  {/* Not lazy: the gallery is this page's lead visual, and an
-                      unloaded auto-height image collapses to nothing. */}
-                  <img src={src} alt="" onLoad={syncScrollHints} />
-                </button>
-              ))}
-            </div>
-            <button
-              type="button"
-              className="pf-strip-nav pf-strip-nav--left"
-              onClick={() => nudgeStrip(-1)}
-              aria-label="Scroll images left"
-              tabIndex={canScroll.left ? 0 : -1}
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              className="pf-strip-nav pf-strip-nav--right"
-              onClick={() => nudgeStrip(1)}
-              aria-label="Scroll images right"
-              tabIndex={canScroll.right ? 0 : -1}
-            >
-              ›
-            </button>
-          </div>
+          galleryStrip
         ) : (
           project.media && (
             <div className="pf-case-hero">
@@ -204,6 +209,9 @@ export default function CaseStudyPage() {
             <p className="pf-case-intro">{project.blurb}</p>
           </div>
         )}
+
+        {/* When a film took the lead slot, the stills follow the copy */}
+        {leadFilm && galleryStrip}
 
         {restFilms.length > 0 && (
           <div className="pf-case-films pf-case-films--rest">

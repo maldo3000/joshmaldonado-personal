@@ -111,6 +111,16 @@ export const projects: PortfolioProject[] = [
         orientation: 'horizontal',
       },
     ],
+    gallery: [
+      '/notes/immersive/reddit-garden.jpg',
+      '/notes/immersive/reddit-garden-detail.jpg',
+      '/notes/immersive/reddit-arch.jpg',
+      '/notes/immersive/reddit-airport.jpg',
+      '/notes/immersive/reddit-trends.jpg',
+      '/notes/immersive/reddit-stage.jpg',
+      '/notes/immersive/reddit-city.jpg',
+      '/notes/immersive/reddit-snoo.jpg',
+    ],
     caseStudy: {
       intro:
         'Reddit is a network of communities — Connected Cities made that literal, linking physical locations through synchronized projection.',
