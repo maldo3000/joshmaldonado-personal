@@ -69,7 +69,7 @@ export const notes: Note[] = [
         poster: '/videos/reddit-cities-poster.jpg',
         orientation: 'horizontal',
         caption:
-          'Reddit at Arcadia Earth — a business event staged across a working attraction.',
+          'Reddit at Arcadia Earth — a summit staged across a working attraction, produced by Mint and Quiver.',
       },
       {
         type: 'p',
@@ -143,10 +143,10 @@ export const notes: Note[] = [
           'Interactive stations let visitors drive the work themselves — real-time vision on one, generative sound on another.',
       },
 
-      { type: 'h2', text: 'Reddit: transforming an attraction into a branded event' },
+      { type: 'h2', text: 'Reddit: transforming an attraction into a summit' },
       {
         type: 'p',
-        text: 'For Reddit, we used Arcadia Earth as the setting for a business-focused event centred on selling to senior leaders.',
+        text: 'For Reddit, produced by Mint and Quiver, we used Arcadia Earth as the setting for a summit centred on selling to senior leaders.',
       },
       {
         type: 'p',
@@ -156,11 +156,11 @@ export const notes: Note[] = [
         type: 'figure',
         images: ['/notes/immersive/reddit-garden.jpg'],
         caption:
-          'A dining room built inside a projected park — the venue doing the work a decor budget usually does.',
+          'The summit opened with an executive breakfast inside a projected park — the venue doing the work a decor budget usually does.',
       },
       {
         type: 'p',
-        text: 'Different areas supported different parts of the event, including presentations, demonstrations, conversations, gifting and branded content. Existing projection infrastructure was combined with additional screens, staging, playback systems and AV equipment.',
+        text: 'The experience opened with an executive breakfast, then moved guests into a sequence of rooms built around demonstrations of Reddit’s ad capabilities. Each space carried a different part of the program — presentations, demos, conversations, gifting and branded content — with the venue’s existing projection infrastructure combined with additional screens, staging, playback systems and AV equipment.',
       },
       {
         type: 'figure',
@@ -177,7 +177,7 @@ export const notes: Note[] = [
         type: 'figure',
         images: ['/notes/immersive/reddit-airport.jpg'],
         caption:
-          'One room re-skinned as an airport terminal, with Reddit’s data staged as departure boards.',
+          'One of the demo rooms re-skinned as an airport terminal, with Reddit’s audience data staged as departure boards.',
       },
       {
         type: 'p',
@@ -197,7 +197,7 @@ export const notes: Note[] = [
       { type: 'h2', text: 'A programmable environment' },
       {
         type: 'p',
-        text: 'Intel and Reddit used similar types of spaces for very different purposes. For Intel, the room became an AI art exhibition and a demonstration of creative computing. For Reddit, it became an immersive conference environment built around a business narrative.',
+        text: 'Intel and Reddit used similar types of spaces for very different purposes. For Intel, the room became an AI art exhibition and a demonstration of creative computing. For Reddit, it became a summit environment built around a sales narrative.',
       },
       {
         type: 'figure',
@@ -207,7 +207,7 @@ export const notes: Note[] = [
         ],
         aspect: 'landscape',
         caption:
-          'Same kind of room, two identities — an exhibition floor and a garden dining room.',
+          'Same kind of room, two identities — an exhibition floor and an executive breakfast.',
       },
       {
         type: 'p',
