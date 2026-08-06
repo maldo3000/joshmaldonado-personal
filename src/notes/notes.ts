@@ -56,10 +56,20 @@ export const notes: Note[] = [
         text: 'Most events place content inside a venue. A projection-mapped experience turns the venue itself into the content.',
       },
       {
-        type: 'figure',
-        images: ['/notes/immersive/intel-balloons.jpg'],
+        type: 'media',
+        video: '/videos/intel-recap.mp4',
+        poster: '/videos/intel-recap-poster.jpg',
+        orientation: 'horizontal',
         caption:
-          'Intel Encore AI Art Show at Illuminarium — the room itself carrying the work.',
+          'Intel Encore AI Art Show at Illuminarium — produced for Intel Canada through Mosaic.',
+      },
+      {
+        type: 'media',
+        video: '/videos/reddit-cities.mp4',
+        poster: '/videos/reddit-cities-poster.jpg',
+        orientation: 'horizontal',
+        caption:
+          'Reddit at Arcadia Earth — a business event staged across a working attraction.',
       },
       {
         type: 'p',
@@ -89,13 +99,18 @@ export const notes: Note[] = [
       },
       {
         type: 'figure',
-        images: ['/notes/immersive/intel-mural.jpg'],
-        caption:
-          'Projection-mapped artwork running the length of the room, floor included.',
+        images: ['/notes/immersive/intel-balloons.jpg'],
+        caption: 'The room itself carrying the work.',
       },
       {
         type: 'p',
         text: 'The objective was to demonstrate the power of Intel machines without relying solely on product specifications or conventional technology messaging. Instead, audiences experienced what the technology could enable.',
+      },
+      {
+        type: 'figure',
+        images: ['/notes/immersive/intel-mural.jpg'],
+        caption:
+          'Projection-mapped artwork running the length of the room, floor included.',
       },
       {
         type: 'p',
@@ -126,13 +141,6 @@ export const notes: Note[] = [
         ],
         caption:
           'Interactive stations let visitors drive the work themselves — real-time vision on one, generative sound on another.',
-      },
-      {
-        type: 'media',
-        video: '/videos/intel-recap.mp4',
-        poster: '/videos/intel-recap-poster.jpg',
-        orientation: 'horizontal',
-        caption: 'Intel Encore AI Art Show — the exhibit in motion.',
       },
 
       { type: 'h2', text: 'Reddit: transforming an attraction into a branded event' },
@@ -184,13 +192,6 @@ export const notes: Note[] = [
         aspect: 'landscape',
         caption:
           'The same footprint carrying a keynote, then a demo — staging and playback layered onto the venue’s own projection.',
-      },
-      {
-        type: 'media',
-        video: '/videos/reddit-cities.mp4',
-        poster: '/videos/reddit-cities-poster.jpg',
-        orientation: 'horizontal',
-        caption: 'Reddit at Arcadia Earth — the event film.',
       },
 
       { type: 'h2', text: 'A programmable environment' },

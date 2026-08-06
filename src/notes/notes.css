@@ -430,6 +430,23 @@
   margin: 2.6rem 0 3rem;
 }
 
+/* On a wide screen the films break out past the article column so they
+   play large. Centring off 50% of the parent means the breakout is
+   measured from the viewport, not the container. Mobile keeps the
+   container width so there's still margin either side. */
+@media (min-width: 900px) {
+  .nt-figure--horizontal {
+    width: min(100vw - 5rem, 78rem);
+    max-width: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nt-figure--horizontal figcaption {
+    max-width: 44rem;
+  }
+}
+
 .nt-figure video {
   display: block;
   width: 100%;
