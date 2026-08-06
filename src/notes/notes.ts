@@ -46,7 +46,7 @@ export const notes: Note[] = [
     slug: 'the-medium-is-the-room',
     kind: 'Case study',
     title: 'The Medium Is the Room',
-    dek: 'Producing branded projection-mapping experiences.',
+    dek: 'Producing branded immersive experiences.',
     date: '2026-08-05',
     readingTime: '5 min',
     ogImage: '/notes/og/the-medium-is-the-room.png',
@@ -71,6 +71,7 @@ export const notes: Note[] = [
         caption:
           'Reddit at Arcadia Earth — a summit staged across a working attraction, produced by Mint and Quiver.',
       },
+      { type: 'h2', text: 'What is a branded immersive experience?' },
       {
         type: 'p',
         text: 'Walls become screens. Rooms become chapters. Guests move through the story instead of simply watching it from a seat.',
