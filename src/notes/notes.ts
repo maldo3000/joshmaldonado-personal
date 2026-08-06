@@ -65,8 +65,8 @@ export const notes: Note[] = [
       },
       {
         type: 'media',
-        video: '/videos/reddit-cities.mp4',
-        poster: '/videos/reddit-cities-poster.jpg',
+        video: '/videos/reddit-arcadia.mp4',
+        poster: '/videos/reddit-arcadia-poster.jpg',
         orientation: 'horizontal',
         caption:
           'Reddit at Arcadia Earth — a summit staged across a working attraction, produced by Mint and Quiver.',

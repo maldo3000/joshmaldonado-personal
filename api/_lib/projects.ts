@@ -101,13 +101,13 @@ export const projects: PortfolioProject[] = [
     blurb:
       'A projection-driven brand experience connecting Reddit communities across cities.',
     media: {
-      video: '/videos/reddit-cities-preview.mp4',
-      poster: '/videos/reddit-cities-poster.jpg',
+      video: '/videos/reddit-arcadia-preview.mp4',
+      poster: '/videos/reddit-arcadia-poster.jpg',
     },
     films: [
       {
-        video: '/videos/reddit-cities.mp4',
-        poster: '/videos/reddit-cities-poster.jpg',
+        video: '/videos/reddit-arcadia.mp4',
+        poster: '/videos/reddit-arcadia-poster.jpg',
         orientation: 'horizontal',
       },
     ],
