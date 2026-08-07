@@ -215,13 +215,13 @@ export const projects: PortfolioProject[] = [
     slug: 'ambition',
     client: 'Ambition Labs',
     title: 'Catalyst',
-    kind: 'BRANDED CONTENT',
+    kind: 'DOCUMENTARY',
     category: 'content',
-    tags: ['Video', 'Branded Content', 'Marketing'],
+    tags: ['Video', 'Documentary', 'Branded Content', 'Film Production'],
     role: 'Producer',
     year: '2026',
     blurb:
-      'Catalyst for Ambition Labs — a long-form brand film, cut down to a vertical social edit.',
+      'A short documentary on Catalyst, Ambition’s two-week user-feedback program — directed by Isaac Sherbino, with a vertical social cut.',
     media: {
       video: '/videos/ambition-catalyst-preview.mp4',
       poster: '/videos/ambition-catalyst-poster.jpg',
@@ -231,7 +231,7 @@ export const projects: PortfolioProject[] = [
         video: '/videos/ambition-catalyst.mp4',
         poster: '/videos/ambition-catalyst-poster.jpg',
         orientation: 'horizontal',
-        caption: 'Catalyst — the full film.',
+        caption: 'Catalyst — the full documentary. Directed by Isaac Sherbino.',
       },
       {
         video: '/videos/ambition-social.mp4',
@@ -242,9 +242,10 @@ export const projects: PortfolioProject[] = [
     ],
     caseStudy: {
       intro:
-        'Catalyst is Ambition Labs’ brand film — the long version made to be watched, and a vertical cut made to be scrolled past and stop someone anyway.',
+        'Catalyst was a program Ambition ran to gather real user feedback through a two-week experience. We were commissioned to tell that story as a short documentary.',
       body: [
-        'I produced the piece from concept through delivery, then oversaw the social edit that carries the same story at a fraction of the runtime.',
+        'Shot and directed by Isaac Sherbino, the film had to hold two things at once: the individual learners and creators moving through the program, and the platform they were putting through its paces. We developed the creative concept together, selected the interviewees, and found the narrative thread that let both stories run in the same film.',
+        'The documentary was delivered alongside a vertical social cut — the same story at a fraction of the runtime, for feeds rather than a full sit-down watch.',
       ],
     },
   },
