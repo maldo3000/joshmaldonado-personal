@@ -213,14 +213,40 @@ export const projects: PortfolioProject[] = [
   },
   {
     slug: 'ambition',
-    client: 'Ambition',
-    title: 'Brand Video',
+    client: 'Ambition Labs',
+    title: 'Catalyst',
     kind: 'BRANDED CONTENT',
     category: 'content',
     tags: ['Video', 'Branded Content', 'Marketing'],
     role: 'Producer',
     year: '2026',
-    blurb: 'Branded marketing video for Ambition.',
+    blurb:
+      'Catalyst for Ambition Labs — a long-form brand film, cut down to a vertical social edit.',
+    media: {
+      video: '/videos/ambition-catalyst-preview.mp4',
+      poster: '/videos/ambition-catalyst-poster.jpg',
+    },
+    films: [
+      {
+        video: '/videos/ambition-catalyst.mp4',
+        poster: '/videos/ambition-catalyst-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'Catalyst — the full film.',
+      },
+      {
+        video: '/videos/ambition-social.mp4',
+        poster: '/videos/ambition-social-poster.jpg',
+        orientation: 'vertical',
+        caption: 'The social cut, recut vertical for feeds.',
+      },
+    ],
+    caseStudy: {
+      intro:
+        'Catalyst is Ambition Labs’ brand film — the long version made to be watched, and a vertical cut made to be scrolled past and stop someone anyway.',
+      body: [
+        'I produced the piece from concept through delivery, then oversaw the social edit that carries the same story at a fraction of the runtime.',
+      ],
+    },
   },
   {
     slug: 'permission-ai-product-videos',
