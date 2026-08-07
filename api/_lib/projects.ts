@@ -95,11 +95,17 @@ export const projects: PortfolioProject[] = [
     title: 'Connected Cities',
     kind: 'PROJECTION',
     category: 'experiential',
-    tags: ['Experiential', 'Projection', 'Branded Experience', 'Creative Technology'],
-    role: 'Producer',
+    tags: [
+      'Experiential',
+      'Projection',
+      'Branded Experience',
+      'Creative Technology',
+      'AV Integration',
+    ],
+    role: 'Content & AV Partner — via Quiver',
     year: '2025',
     blurb:
-      'A projection-driven brand experience connecting Reddit communities across cities.',
+      'Reddit’s summit inside Arcadia Earth — content and full technical integration into the venue’s screens, plus a bespoke projection room built for the storefront.',
     media: {
       video: '/videos/reddit-arcadia-preview.mp4',
       poster: '/videos/reddit-arcadia-poster.jpg',
@@ -123,10 +129,10 @@ export const projects: PortfolioProject[] = [
     ],
     caseStudy: {
       intro:
-        'Reddit is a network of communities — Connected Cities made that literal, linking physical locations through synchronized projection.',
+        'Reddit took over Arcadia Earth for a summit aimed at senior marketers. Mint led the engagement; I came in through Quiver and Graham Budd as the content and AV partner.',
       body: [
-        'I produced the activation from concept through show nights: large-format projection, site logistics and permits, content pipeline, and the creative-technology build that tied the locations together.',
-        'The piece turned Reddit’s abstract community graph into something you could stand inside — live, synchronized and public.',
+        'I managed a portion of the content and all of the technical integration into Arcadia Earth’s existing screens — fitting Reddit’s program to a working attraction’s infrastructure and keeping the venue’s systems, the agency’s content and the AV build running as one.',
+        'We also built a completely bespoke projection room for the storefront, purpose-made for the event rather than adapted from what the venue already had.',
       ],
     },
   },

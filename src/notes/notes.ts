@@ -69,7 +69,7 @@ export const notes: Note[] = [
         poster: '/videos/reddit-arcadia-poster.jpg',
         orientation: 'horizontal',
         caption:
-          'Reddit at Arcadia Earth — a summit staged across a working attraction, produced by Mint and Quiver.',
+          'Reddit at Arcadia Earth — a summit staged across a working attraction. Led by Mint, with content and AV through Quiver.',
       },
       { type: 'h2', text: 'What is a branded immersive experience?' },
       {
@@ -147,11 +147,11 @@ export const notes: Note[] = [
       { type: 'h2', text: 'Reddit: transforming an attraction into a summit' },
       {
         type: 'p',
-        text: 'For Reddit, produced by Mint and Quiver, we used Arcadia Earth as the setting for a summit centred on selling to senior leaders.',
+        text: 'For Reddit, Arcadia Earth became the setting for a summit centred on selling to senior leaders. Mint led the engagement; I came in through Quiver and Graham Budd as the content and AV partner, managing a portion of the content and all of the technical integration into the venue’s screens.',
       },
       {
         type: 'p',
-        text: 'Rather than placing the program inside a traditional conference venue, we transformed a series of existing immersive rooms into a connected Reddit experience.',
+        text: 'Rather than placing the program inside a traditional conference venue, a series of existing immersive rooms was turned into a connected Reddit experience — including a completely bespoke projection room built for the storefront.',
       },
       {
         type: 'figure',
