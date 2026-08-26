@@ -227,7 +227,7 @@ export const projects: PortfolioProject[] = [
     role: 'Producer',
     year: '2026',
     blurb:
-      'A short documentary on Catalyst, Ambition’s two-week user-feedback program — directed by Isaac Sherbino, with a vertical social cut.',
+      'A short documentary on Catalyst, Ambition’s two-week user-feedback program, with a vertical social cut.',
     media: {
       video: '/videos/ambition-catalyst-preview.mp4',
       poster: '/videos/ambition-catalyst-poster.jpg',
@@ -237,7 +237,8 @@ export const projects: PortfolioProject[] = [
         video: '/videos/ambition-catalyst.mp4',
         poster: '/videos/ambition-catalyst-poster.jpg',
         orientation: 'horizontal',
-        caption: 'Catalyst — the full documentary. Directed by Isaac Sherbino.',
+        caption:
+          'Catalyst — the full documentary. Directed by Isaac Sherbino and Josh Maldonado.',
       },
       {
         video: '/videos/ambition-social.mp4',
@@ -250,7 +251,7 @@ export const projects: PortfolioProject[] = [
       intro:
         'Catalyst was a program Ambition ran to gather real user feedback through a two-week experience. We were commissioned to tell that story as a short documentary.',
       body: [
-        'Shot and directed by Isaac Sherbino, the film had to hold two things at once: the individual learners and creators moving through the program, and the platform they were putting through its paces. We developed the creative concept together, selected the interviewees, and found the narrative thread that let both stories run in the same film.',
+        'The film had to hold two things at once: the individual learners and creators moving through the program, and the platform they were putting through its paces. We developed the creative concept together, selected the interviewees, and found the narrative thread that let both stories run in the same film.',
         'The documentary was delivered alongside a vertical social cut — the same story at a fraction of the runtime, for feeds rather than a full sit-down watch.',
       ],
     },
