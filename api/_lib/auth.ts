@@ -2,6 +2,13 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 
 export const COOKIE_NAME = 'pf_session'
 
+/**
+ * TEMPORARY: portfolio password protection is disabled.
+ * Flip back to `false` to re-lock the portfolio — that is the only change
+ * needed; the login endpoint and PasswordGate are otherwise untouched.
+ */
+export const PORTFOLIO_UNLOCKED = true
+
 function configuredPassword(): string | null {
   const pw = process.env.PORTFOLIO_PASSWORD
   return pw && pw.length > 0 ? pw : null
@@ -28,6 +35,7 @@ export function passwordIsCorrect(input: unknown): boolean {
 }
 
 export function tokenIsValid(token: string | undefined): boolean {
+  if (PORTFOLIO_UNLOCKED) return true
   const expected = sessionToken()
   return !!token && expected !== null && safeEqual(token, expected)
 }
