@@ -224,7 +224,7 @@ export const notes: Note[] = [
       },
       {
         type: 'p',
-        text: 'Video follows one rule above the rest: footage is never cut inside a motion engine. Footage is cut with ffmpeg against a beat grid when music leads, or from a transcript when speech leads. Graphics come from the brand’s one motion engine, HyperFrames for HTML timelines or Remotion for React components, and land on top as a transparent overlay, so a series keeps the same look from episode to episode, in every aspect ratio it ships.',
+        text: 'Video follows one rule above the rest: footage is never cut inside a motion engine. Footage is cut with ffmpeg against a beat grid when music leads, or from a transcript when speech leads. Graphics come from a motion engine picked for the piece, HyperFrames for timeline graphics, Remotion for many data-driven variants, or plain code for procedural work. No brand is locked to one; each has a default, and every engine reads the same brand tokens. The graphics land on top as a transparent overlay, so a series keeps the same look from episode to episode, in every aspect ratio it ships.',
       },
 
       { type: 'h2', text: 'Publishing' },
