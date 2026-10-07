@@ -1,3 +1,14 @@
+/** Diagrams drawn in HTML by diagrams.tsx (kept here so this file stays JSX-free for the edge middleware) */
+export type DiagramId =
+  | 'layers'
+  | 'fanout'
+  | 'core'
+  | 'roundtrip'
+  | 'publish'
+  | 'tools'
+  | 'tree'
+  | 'status'
+
 export type NoteBlock =
   | { type: 'p'; text: string }
   | { type: 'h2'; text: string }
@@ -25,6 +36,19 @@ export type NoteBlock =
       aspect?: 'portrait' | 'landscape'
     }
   | { type: 'list'; items: string[] }
+  /** Explanatory figure drawn in HTML (see diagrams.tsx) */
+  | { type: 'diagram'; id: DiagramId; caption?: string }
+  /** A file to download, as a card with one button */
+  | {
+      type: 'download'
+      kind: string
+      title: string
+      text: string
+      href: string
+      label: string
+    }
+  /** Shell commands or file listings, set in mono */
+  | { type: 'code'; text: string }
 
 export type Note = {
   slug: string
@@ -38,10 +62,237 @@ export type Note = {
   /** Link-preview image — a frame from the piece with the title overlaid.
    *  Falls back to the site's default card when unset. */
   ogImage?: string
+  /** Wider reading column on desktop for long, diagram-heavy notes */
+  wide?: boolean
   blocks: NoteBlock[]
 }
 
 export const notes: Note[] = [
+  {
+    slug: 'the-brand-agent',
+    kind: 'Field guide',
+    title: 'The Brand Agent',
+    dek: 'How I use agents to make quality, on-brand content at scale, and a skill to set up your own. One repository per brand, holding the brand and the tools that turn one idea into finished work for every platform.',
+    date: '2026-10-07',
+    readingTime: '9 min',
+    ogImage: '/notes/og/the-brand-agent.png',
+    wide: true,
+    blocks: [
+      {
+        type: 'media',
+        video: '/videos/the-brand-agent.mp4',
+        poster: '/videos/the-brand-agent-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'The brand agent in 80 seconds.',
+      },
+      {
+        type: 'p',
+        text: 'Brands need more content than ever. Every platform wants its own format, every campaign needs more than one angle, and every post has to earn its audience. Agents can produce that volume now. The hard part is making every piece look and sound like the brand, the hundredth as much as the first.',
+      },
+      {
+        type: 'p',
+        text: 'That’s the problem a brand agent solves: quality, brand-consistent content at scale, across many posts and many platforms, made with agents. This is how it’s built, the tools inside it, and why each piece exists.',
+      },
+
+      { type: 'h2', text: 'What a brand agent is' },
+      {
+        type: 'p',
+        text: 'A brand agent is a repository for one brand. It holds the brand itself, written down so an agent can follow it, and the tools that turn an idea into finished work: carousels, posts, stories, decks, print and video, in every format each platform needs. You hand it a brief. Agents do the production. The brand decides what on-brand means.',
+      },
+      {
+        type: 'p',
+        text: 'At its heart, a brand agent is about content production. The rules that make a piece on-brand are written down where every agent can read them, and they’re adjustable in one place. Change the accent color, the fonts, the voice or any other brand element, and every piece of content made after that, whether a post, a carousel or a video, adheres to the new standard, because every agent and every template reads from the same files.',
+      },
+      {
+        type: 'p',
+        text: 'Additionally, you can add distribution: publishing, to schedule and post organic content, and a Meta Ads connection, to put the brand on paid social and see what’s working. Every change is tracked, so nothing an agent does is lost or permanent. And because a brand agent is just a repository, you can share it with your team, so everyone can produce on-brand work with the same rules, parts and assets.',
+      },
+      {
+        type: 'diagram',
+        id: 'layers',
+        caption: 'The colors carry through every diagram below.',
+      },
+      {
+        type: 'p',
+        text: '**The brand core** is the rulebook: what the brand is, written once for every tool, the video engines included. **The design system** is the kit built from that rulebook: ready-made pieces and full templates for layouts, at the sizes each platform uses. **The asset library** is what the kit is filled with: logos, fonts, photography, footage and graphic elements. Agents read the rules to know what’s right, and build from the kit and the library so they don’t start from a blank page. Change a rule and the kit updates with it, because the kit is built from the rules.',
+      },
+
+      { type: 'h2', text: 'One idea, every format' },
+      {
+        type: 'p',
+        text: 'The core loop starts small. One idea, a launch or a recap or a few lines of copy, goes in. A coordinated set comes out: the carousel, the story, the square, the wide cut, the short video, each shaped for its platform and all of them recognizably the same brand.',
+      },
+      {
+        type: 'diagram',
+        id: 'fanout',
+        caption: 'Scale comes from the fan-out. Consistency comes from every output being built from the same system.',
+      },
+      {
+        type: 'figure',
+        images: ['/notes/brand-agent/permission-five-more-minutes.jpg'],
+        caption:
+          'Permission, a family AI product. One made-up idea, “five more minutes,” as a cold open, a framed moment, a story and a wide slide, designed by the brand agent from Permission’s design system, with frames from the brand’s own films under its purple tint. An example, not a real campaign.',
+      },
+
+      { type: 'h2', text: 'The rules: the brand, written down three ways' },
+      {
+        type: 'p',
+        text: 'An agent can only be as consistent as what it’s given. So the brand lives in three files, and the most important design decision was giving each one a different job.',
+      },
+      {
+        type: 'diagram',
+        id: 'core',
+        caption: 'Values, rules and feel live in separate files, so each can be right without the others getting in the way.',
+      },
+      {
+        type: 'p',
+        text: 'tokens.json holds the values code needs: every color, typeface, size, margin and format, in the open design-token standard. Nothing else in the repo is allowed to define a value. A script writes each tool’s copy, one for HyperFrames, one for Remotion, one for the design system, and fails if any of them drifts. Before this, one brand had its colors written in four places that slowly disagreed.',
+      },
+      {
+        type: 'p',
+        text: 'BRAND.md holds judgment that code can’t: voice, the type hierarchy, what never happens to the logo. And canon/ holds approved work, each piece with a short note on why it works.',
+      },
+      {
+        type: 'pull',
+        text: 'Rules say what’s allowed. Examples show what right looks like.',
+      },
+      {
+        type: 'p',
+        text: 'Canon is the piece that moved the quality most. Agents copy examples far better than they follow adjectives. A rule like “keep it minimal” produces something in-palette and generic. A note like “the grounds alternate across the carousel while the frame stays fixed” produces something that looks like the brand. So BRAND.md ends with a section called How it looks in practice: the handful of concrete moves you find when you lay the canon side by side and ask what repeats.',
+      },
+      {
+        type: 'figure',
+        images: [
+          '/notes/brand-agent/cs-bip-1.jpg',
+          '/notes/brand-agent/cs-bip-2.jpg',
+          '/notes/brand-agent/cs-bip-3.jpg',
+        ],
+        caption:
+          'CTRL+SHIFT, Building in Public. The moves are legible: heavy display type staircased left, one violet as both tint and ground, photos duotoned into it, a meta rail on every slide.',
+      },
+
+      { type: 'h2', text: 'The parts: one design system, two places to design' },
+      {
+        type: 'p',
+        text: 'The design system is the rules turned into parts: the tokens, a set of classes named after the canon’s moves, preview cards, and full templates for every format the brand ships. It’s plain HTML and CSS, and a thin layer of components syncs it into a design-system project in Claude Design.',
+      },
+      {
+        type: 'diagram',
+        id: 'roundtrip',
+        caption: 'The round trip. Neither tool is the source of truth; the brand core is.',
+      },
+      {
+        type: 'p',
+        text: 'So a design can start in either place. I explore in Claude Design when I want to establish the look of a campaign. An agent in the repo reads the same system and designs from it directly: a new layout, not just a resize or new copy. Whichever side a piece starts on, it ends up as the same HTML and gets checked against the same canon. Because both sides speak HTML, nothing gets translated: a Claude Design file rendered by the repo matches Claude Design’s own export pixel for pixel.',
+      },
+
+      { type: 'h2', text: 'The materials: an asset library' },
+      {
+        type: 'p',
+        text: 'Rules and templates only get you so far. Every piece also needs real material, so each brand agent keeps its own library: the logo and mark in every colorway, the brand fonts, approved photography, footage from the brand’s own films, illustrations and graphic elements. It lives in the repo next to the rules, and the templates and video projects draw from it directly.',
+      },
+      {
+        type: 'p',
+        text: 'When the library runs short, agents can go and get more. They search and download licensed stock photos and video, with every credit logged so attribution travels with the file, and generate voiceover, music and sound effects in the brand’s voice. The Permission example above uses frames from the brand’s own films under its purple tint, because the brand’s own material always beats a generic image.',
+      },
+
+      { type: 'h2', text: 'Quality: nothing ships unreviewed' },
+      {
+        type: 'p',
+        text: 'Scale is easy to get wrong quietly. So every static piece renders to one image per frame at native size, and an agent looks at every frame before anyone else does: overlaps, contrast, safe zones, type that’s too small, a logo that didn’t render, anything that drifts from the canon.',
+      },
+      {
+        type: 'sequence',
+        label: 'A static piece, start to finish',
+        steps: [
+          { tool: 'Template', description: 'The closest design-system template to the brief.' },
+          { tool: 'Copy + imagery', description: 'Written in the brand’s voice. Structure, margins and type stay.' },
+          { tool: 'Render', description: 'Headless Chrome, one image per frame, every format the platforms need.' },
+          { tool: 'Review', description: 'Every frame checked against the canon before it’s shown.' },
+          { tool: 'Variations', description: 'New copy, new formats, new angles from the same approved piece.' },
+        ],
+      },
+      {
+        type: 'figure',
+        images: [
+          '/notes/brand-agent/cs-devday-1.jpg',
+          '/notes/brand-agent/cs-devday-2.jpg',
+          '/notes/brand-agent/cs-devday-3.jpg',
+        ],
+        caption:
+          'A next-day event recap for CTRL+SHIFT, generated from the brand system and scheduled the same afternoon.',
+      },
+      {
+        type: 'p',
+        text: 'Video follows one rule above the rest: footage is never cut inside a motion engine. Footage is cut with ffmpeg against a beat grid when music leads, or from a transcript when speech leads. Graphics come from the brand’s one motion engine, HyperFrames for HTML timelines or Remotion for React components, and land on top as a transparent overlay, so a series keeps the same look from episode to episode, in every aspect ratio it ships.',
+      },
+
+      { type: 'h2', text: 'Publishing' },
+      {
+        type: 'p',
+        text: 'Publishing takes finished organic content and posts it. A campaign file, post.json, lists what goes where and when, with a POST.md beside it for people to read. A channels file maps each account to the way it gets posted: a scheduler API for connected accounts, a browser agent that works a platform’s own scheduler for accounts that aren’t, or a hand-off folder for a person.',
+      },
+      {
+        type: 'diagram',
+        id: 'publish',
+        caption: 'The approval gate isn’t optional. Nothing reaches a live account without a yes for those posts, those accounts, those times.',
+      },
+
+      { type: 'h2', text: 'Paid social' },
+      {
+        type: 'p',
+        text: 'Meta’s Ads MCP connects the brand agent to Ads Manager, where paid social actually runs: the campaigns, the ads, and how they perform. The paid creative comes out of the same system as everything else, so an ad looks like the brand rather than like an ad. Permission’s design system even has a paid-social register: darker grounds, one word in green, the same voice delivered louder.',
+      },
+      {
+        type: 'p',
+        text: 'In my setup the connection is read-only for now, with every tool that could change a campaign blocked in the configuration. The agent pulls the numbers into a short report whose first paragraph says what to change in the next piece, and I make the changes in Ads Manager. Work that performs joins the canon. A pattern that holds becomes a rule.',
+      },
+
+      { type: 'h2', text: 'The tools' },
+      {
+        type: 'diagram',
+        id: 'tools',
+        caption: 'Each tool, colored by the layers it serves. A coding agent runs all of them.',
+      },
+
+      { type: 'h2', text: 'Tracking' },
+      {
+        type: 'p',
+        text: 'Every brand repo is under git, with images, video and audio in Git LFS, so every change is tracked. That’s what makes working at this speed safe: an agent can change a template, the brand colors and three designs in a minute, and git turns all of that into something you can see and reverse. It also ties a finished piece to the exact recipe that made it, so “the version from two weeks ago, with new copy” becomes a re-render instead of a rebuild.',
+      },
+      {
+        type: 'diagram',
+        id: 'tree',
+        caption: 'Every brand repo has this shape. Brands never copy each other’s files, only the pattern.',
+      },
+
+      { type: 'h2', text: 'Set up your own' },
+      {
+        type: 'p',
+        text: 'I packaged the method as an agent skill: plain markdown and scripts, so it works in Claude Code and Codex alike. It covers content production, distribution and tracking, with a reference for each part, the templates a new brand repo starts from, a scaffolder that sets up git and LFS, the renderer that turns any HTML design, Claude Design exports and decks included, into exact images, and the publish tool with its approval gate. None of my brands are in it. It’s still a work in progress, and it will keep changing as I discover more.',
+      },
+      {
+        type: 'download',
+        kind: 'Agent skill · 53 KB',
+        title: 'brand-agent',
+        text: 'The method, templates, scaffolder, renderer and publish tool for running a brand agent.',
+        href: '/downloads/brand-agent.zip',
+        label: 'Download ↓',
+      },
+      {
+        type: 'code',
+        text: 'unzip brand-agent.zip -d ~/.claude/skills/\ncd ~/.claude/skills/brand-agent/scripts/static && npm install\n\n# start a brand\npython3 ~/.claude/skills/brand-agent/scripts/init_brand.py ~/Projects/acme-brand --name "Acme"\n\n# Codex: link the same skill\nln -s ~/.claude/skills/brand-agent ~/.codex/skills/brand-agent',
+      },
+      {
+        type: 'p',
+        text: 'Then open the new repo in your coding agent, drop your guidelines and best work in, and ask it to build the brand core. Start with the canon. It’s the part that makes everything after it look like you.',
+      },
+      {
+        type: 'pull',
+        text: 'The brand is the spec. The agents are the production team.',
+      },
+    ],
+  },
   {
     slug: 'the-medium-is-the-room',
     kind: 'Case study',

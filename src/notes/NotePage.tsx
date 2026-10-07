@@ -1,7 +1,15 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { Diagram } from './diagrams'
 import { findNote, formatNoteDate } from './notes'
 import './notes.css'
+
+/** Paragraph text with **bold** spans; everything else stays plain text. */
+function inline(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part,
+  )
+}
 
 export default function NotePage() {
   const { slug } = useParams()
@@ -37,7 +45,7 @@ export default function NotePage() {
         </Link>
       </header>
 
-      <article className="nt-article">
+      <article className={`nt-article${note.wide ? ' nt-article--wide' : ''}`}>
         <p className="nt-eyebrow">{note.kind}</p>
         <h1 className="nt-title">{note.title}</h1>
         <p className="nt-dek">{note.dek}</p>
@@ -90,6 +98,30 @@ export default function NotePage() {
                 </figure>
               )
             }
+            if (block.type === 'diagram') {
+              return <Diagram key={i} id={block.id} caption={block.caption} />
+            }
+            if (block.type === 'download') {
+              return (
+                <section key={i} className="nt-download">
+                  <div>
+                    <p className="nt-download-kind">{block.kind}</p>
+                    <p className="nt-download-title">{block.title}</p>
+                    <p className="nt-download-text">{block.text}</p>
+                  </div>
+                  <a className="nt-download-button" href={block.href} download>
+                    {block.label}
+                  </a>
+                </section>
+              )
+            }
+            if (block.type === 'code') {
+              return (
+                <pre key={i} className="nt-code">
+                  <code>{block.text}</code>
+                </pre>
+              )
+            }
             if (block.type === 'list') {
               return (
                 <ul key={i} className="nt-list-block">
@@ -116,7 +148,7 @@ export default function NotePage() {
                 </figure>
               )
             }
-            return <p key={i}>{block.text}</p>
+            return <p key={i}>{inline(block.text)}</p>
           })}
         </div>
 
