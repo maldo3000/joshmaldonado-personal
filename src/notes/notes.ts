@@ -269,13 +269,13 @@ export const notes: Note[] = [
       { type: 'h2', text: 'Set up your own' },
       {
         type: 'p',
-        text: 'I packaged the method as an agent skill: plain markdown and scripts, so it works in Claude Code and Codex alike. It covers content production, distribution and tracking, with a reference for each part, the templates a new brand repo starts from, a scaffolder that sets up git and LFS, the renderer that turns any HTML design, Claude Design exports and decks included, into exact images, and the publish tool with its approval gate. None of my brands are in it. It’s still a work in progress, and it will keep changing as I discover more.',
+        text: 'I packaged the method as an agent skill: plain markdown and scripts, so it works in Claude Code and Codex alike. It covers content production, distribution and tracking, with a reference for each part, the templates a new brand repo starts from, a scaffolder that sets up git and LFS, an onboarding conversation that takes a new brand from a pile of material to ready, the renderer that turns any HTML design, Claude Design exports and decks included, into exact images, and the publish tool with its approval gate. None of my brands are in it. It’s still a work in progress, and it will keep changing as I discover more.',
       },
       {
         type: 'download',
-        kind: 'Agent skill · 53 KB',
+        kind: 'Agent skill · 57 KB',
         title: 'brand-agent',
-        text: 'The method, templates, scaffolder, renderer and publish tool for running a brand agent.',
+        text: 'The method, templates, scaffolder, onboarding, renderer and publish tool for running a brand agent.',
         href: '/downloads/brand-agent.zip',
         label: 'Download ↓',
       },
@@ -285,7 +285,7 @@ export const notes: Note[] = [
       },
       {
         type: 'p',
-        text: 'Then open the new repo in your coding agent, drop your guidelines and best work in, and ask it to build the brand core. Start with the canon. It’s the part that makes everything after it look like you.',
+        text: 'Then open the new repo in your coding agent and say “onboard this brand.” It asks for everything you have, drafts the brand, plays it back for your corrections and proves it with three real pieces. Start with the canon. It’s the part that makes everything after it look like you.',
       },
       {
         type: 'pull',
