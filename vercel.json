@@ -5,8 +5,8 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/cut-from-paper/",
-      "destination": "/cut-from-paper/index.html"
+      "source": "/software-is-a-medium/",
+      "destination": "/software-is-a-medium/index.html"
     },
     {
       "source": "/((?!api/).*)",
@@ -15,8 +15,18 @@
   ],
   "redirects": [
     {
+      "source": "/software-is-a-medium",
+      "destination": "/software-is-a-medium/",
+      "permanent": true
+    },
+    {
       "source": "/cut-from-paper",
-      "destination": "/cut-from-paper/",
+      "destination": "/software-is-a-medium/",
+      "permanent": true
+    },
+    {
+      "source": "/cut-from-paper/:path*",
+      "destination": "/software-is-a-medium/:path*",
       "permanent": true
     }
   ]
