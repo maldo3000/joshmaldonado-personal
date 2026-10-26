@@ -25,6 +25,11 @@
       "permanent": true
     },
     {
+      "source": "/cut-from-paper/",
+      "destination": "/software-is-a-medium/",
+      "permanent": true
+    },
+    {
       "source": "/cut-from-paper/:path*",
       "destination": "/software-is-a-medium/:path*",
       "permanent": true
