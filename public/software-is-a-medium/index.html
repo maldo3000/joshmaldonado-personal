@@ -106,7 +106,7 @@ img { display: block; }
 .anim .slot { aspect-ratio: 3 / 2; }
 .anim .layout .rv { opacity: 0; }
 .anim .narrow .layout { display: block; padding-top: calc(env(safe-area-inset-top, 0px) + 24px); }
-.anim .text-flow { padding-block: 36px 120px; }
+.anim .text-flow { position: relative; z-index: 3; padding-block: 36px 120px; }
 
 .text { display: grid; gap: 22px; min-width: 0; }
 .eyebrow { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; color: var(--ac); }
@@ -152,15 +152,24 @@ img { display: block; }
 .hero .stage { box-shadow: none; }
 .title { position: absolute; left: max(4%, env(safe-area-inset-left, 0px)); top: calc(env(safe-area-inset-top, 0px) + 9vh); display: flex; flex-direction: column; align-items: flex-start; gap: 10px; z-index: 5; max-width: 92%; margin: 0; }
 .static .hero .title { position: absolute; top: 6%; }
-.strip { display: inline-block; font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: 1; letter-spacing: -.06em; padding: .1em .3em .12em .26em; background: var(--cream); color: var(--ink); box-shadow: 4px 6px 0 rgba(0,0,0,.28); font-size: clamp(34px, 6.6vw, 104px); will-change: transform; }
+.strip { display: inline-block; font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: 1; letter-spacing: -.06em; padding: .1em .3em .12em .26em; background: var(--cream); color: var(--ink); box-shadow: 4px 6px 0 rgba(0,0,0,.28); font-size: clamp(34px, 6.6vw, 104px); white-space: nowrap; will-change: transform; }
 .strip:nth-child(1) { transform: rotate(-2deg); }
-.strip:nth-child(2) { transform: rotate(1.2deg); background: var(--vermilion); color: var(--cream); margin-left: 6%; }
+.strip:nth-child(2) { transform: rotate(1.2deg); background: var(--vermilion); color: var(--cream); margin-left: .45em; }
 .strip:nth-child(3) { transform: rotate(-.6deg); background: var(--chrome); }
 .hero-top { position: absolute; z-index: 5; left: 0; right: 0; top: calc(env(safe-area-inset-top, 0px) + 18px); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--cream); text-shadow: 0 1px 2px rgba(0,0,0,.5); }
 .cue { position: absolute; z-index: 5; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); transform: translateX(-50%); display: inline-flex; align-items: center; gap: 12px; color: var(--cream); background: rgba(22,22,27,.72); padding: 10px 16px; text-decoration: none; }
 .cue b { display: inline-block; animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translateY(5px); } }
-@media (max-width: 600px) { .cue { bottom: calc(env(safe-area-inset-bottom, 0px) + 76px); white-space: nowrap; } }
+@media (max-width: 600px) {
+  .cue { bottom: calc(env(safe-area-inset-bottom, 0px) + 76px); white-space: nowrap; }
+  .hero-top { flex-direction: column; gap: 2px; }
+  .title { top: calc(env(safe-area-inset-top, 0px) + 112px); }
+  .strip { font-size: 12vw; }
+}
+@media (max-height: 500px) and (min-width: 601px) {
+  .title { top: calc(env(safe-area-inset-top, 0px) + 54px); }
+  .strip { font-size: clamp(30px, 11vh, 60px); }
+}
 .static .hero { padding-block: 40px; }
 .static .hero .pin { max-width: 1320px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
 .static .cue { display: none; }
@@ -242,6 +251,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: 
 .snd[aria-pressed="true"] .wave { opacity: 1; }
 .snd[aria-pressed="true"] .mute { opacity: 0; }
 .static .snd { display: none; }
+/* on phones the button folds to its icon once the reader is past the title */
+@media (max-width: 600px) {
+  .scrolled .snd { padding: 11px; }
+  .scrolled .snd span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .cue b, .spot::after { animation: none; }
@@ -393,11 +407,32 @@ const E = {
 };
 const on = (t) => (t > 0 ? 1 : 0);
 const bez = (p0, p1, p2, p3, t) => { const u = 1 - t; return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3; };
+// Monotone cubic (Fritsch–Carlson) through [t, y] keys: glides through each key, never overshoots, holds at the ends.
+function spline(keys) {
+  const n = keys.length, t = keys.map(k => k[0]), y = keys.map(k => k[1]), d = [], m = new Array(n).fill(0);
+  for (let i = 0; i < n - 1; i++) d.push((y[i + 1] - y[i]) / (t[i + 1] - t[i]));
+  for (let i = 1; i < n - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
+  for (let i = 0; i < n - 1; i++) {
+    if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
+    const a = m[i] / d[i], b = m[i + 1] / d[i], s = a * a + b * b;
+    if (s > 9) { const k = 3 / Math.sqrt(s); m[i] = k * a * d[i]; m[i + 1] = k * b * d[i]; }
+  }
+  return (x) => {
+    if (x <= t[0]) return y[0];
+    if (x >= t[n - 1]) return y[n - 1];
+    let i = 0; while (x > t[i + 1]) i++;
+    const h = t[i + 1] - t[i], u = (x - t[i]) / h;
+    return (2 * u ** 3 - 3 * u ** 2 + 1) * y[i] + (u ** 3 - 2 * u ** 2 + u) * h * m[i] + (3 * u ** 2 - 2 * u ** 3) * y[i + 1] + (u ** 3 - u ** 2) * h * m[i + 1];
+  };
+}
 
-/* ── per-scene choreography. a: 0..1 action progress, T: seconds, S: scene api ── */
+/* ── per-scene choreography. a: 0..1 action progress, T: seconds, S: scene api.
+   pan: where the camera looks when the screen is too narrow for the whole scene (phones),
+   as [a, scene x %] keys that follow the action. ── */
 const SCENES = {
   hero: {
     len: 300, focus: [.35, .5], hero: true,
+    pan: [[0, 15], [.13, 15], [.79, 86]],
     over: ['sun', 'cave', 'press', 'camera', 'gramophone', 'projector', 'computer', 'browser'],
     origin: { sun: '50% 60%' },
     run(a, T, S) {
@@ -413,6 +448,7 @@ const SCENES = {
   },
   cave: {
     len: 470, focus: [.55, .5],
+    pan: [[0, 50], [.3, 75], [.36, 66], [.56, 74], [.64, 58], [.8, 38], [.95, 44]],
     over: ['hand', 'bison', 'man', 'flame'],
     origin: { flame: '50% 92%', man: '50% 100%' },
     glow: { x: 43.6, y: 30, r: 58, c: '255, 168, 70' },
@@ -435,6 +471,7 @@ const SCENES = {
   },
   press: {
     len: 470, focus: [.4, .5],
+    pan: [[0, 16], [.16, 26], [.42, 40], [.92, 70]],
     over: ['man', 'sheet'],
     origin: { man: '62% 100%' },
     run(a, T, S) {
@@ -452,6 +489,7 @@ const SCENES = {
   },
   photo: {
     len: 520, focus: [.4, .55],
+    pan: [[0, 80], [.24, 74], [.42, 36], [.52, 40], [.92, 50]],
     over: ['sun', 'hut', 'boat', 'tree', 'flower', 'boy', 'photo'],
     origin: { hut: '50% 100%', tree: '30% 100%', flower: '50% 70%', boat: '50% 100%' },
     run(a, T, S) {
@@ -478,6 +516,7 @@ const SCENES = {
   },
   sound: {
     len: 480, focus: [.62, .5],
+    pan: [[0, 20], [.12, 22], [.5, 72], [.7, 76], [.8, 80]],
     over: ['ribbons', 'star', 'moon', 'lamp'],
     under: ['boy', 'guitar', 'cassette'],
     origin: { guitar: '50% 100%', ribbons: '0% 50%' },
@@ -503,6 +542,7 @@ const SCENES = {
   },
   film: {
     len: 500, focus: [.6, .45], skip: ['screen'],
+    pan: [[0, 58], [.24, 32], [.3, 28], [.4, 66], [.5, 73]],
     over: ['beam'],
     under: ['audience'],
     origin: { beam: '0% 50%' },
@@ -519,6 +559,7 @@ const SCENES = {
   },
   desktop: {
     len: 480, focus: [.45, .5], skip: ['screen'],
+    pan: [[0, 16], [.2, 20], [.3, 52], [.9, 66]],
     over: ['lamp'],
     under: ['poster'],
     glow: { x: 11, y: 15, r: 30, c: '255, 200, 100' },
@@ -546,6 +587,7 @@ const SCENES = {
   },
   web: {
     len: 480, focus: [.5, .5],
+    pan: [[0, 50], [.08, 20], [.37, 84], [.44, 64], [.5, 26], [.66, 76], [.8, 50]],
     over: ['sun', 'house', 'cables', 'chain', 'frame'],
     origin: { house: '50% 100%' },
     run(a, T, S) {
@@ -563,6 +605,7 @@ const SCENES = {
   },
   phone: {
     len: 480, focus: [.5, .4],
+    pan: [[0, 16], [.3, 84], [.36, 58], [.52, 32], [.66, 18], [.82, 84], [.94, 50]],
     over: ['beam', 'raise'],
     run(a, T, S) {
       S.cam(lerp(1.12, 1, E.inOut(seg(a, .1, 1))), 50, 40);
@@ -582,6 +625,7 @@ const SCENES = {
   },
   now: {
     len: 520, focus: [.5, .5],
+    pan: [[0, 50], [.44, 50], [.6, 66], [.7, 24], [.8, 80], [.94, 50]],
     over: ['ribbons', 'island', 'car', 'trail', 'plane', 'watch', 'bubble'],
     origin: { island: '50% 100%' },
     spots: true,
@@ -723,14 +767,15 @@ const sections = [...document.querySelectorAll('[data-scene]')];
 const scenes = sections.map(sec => ({ sec, key: sec.dataset.scene, S: buildScene(sec, sec.dataset.scene), visible: false, done: false }));
 
 /* where the stage folds to: the slot in the layout (wide) or a band at the top (narrow) */
-let wide = true;
+let wide = true, SAFE_TOP = 0;
 function placeText() {
   wide = innerWidth >= 960 && innerHeight >= 560;
+  SAFE_TOP = parseFloat(getComputedStyle(document.body, '::before').height) || 0;
   for (const sc of scenes) {
     if (sc.key === 'hero') continue;
-    const pin = sc.sec.querySelector('.pin'), text = sc.sec.querySelector('.text'), layout = sc.sec.querySelector('.layout');
+    const pin = sc.sec.querySelector('.pin'), text = sc.text = sc.sec.querySelector('.text'), layout = sc.sec.querySelector('.layout');
     if (reduce) { sc.sec.classList.toggle('narrow', !wide); continue; }
-    if (wide && text.parentElement !== layout) { layout.appendChild(text); text.classList.remove('wrap', 'text-flow'); }
+    if (wide && text.parentElement !== layout) { layout.appendChild(text); text.classList.remove('wrap', 'text-flow'); text.style.marginTop = ''; }
     sc.side = wide && text.offsetHeight <= (pin.clientHeight || innerHeight) - 48;
     sc.sec.classList.toggle('narrow', !sc.side);
     if (!sc.side && text.parentElement === layout) { sc.sec.querySelector('.track').after(text); text.classList.add('wrap', 'text-flow'); text.querySelectorAll('.rv').forEach(r => { r.style.opacity = ''; r.style.transform = ''; }); }
@@ -763,16 +808,24 @@ function update(sc, T) {
   const tr = track.getBoundingClientRect();
   const p = reduce ? 1 : clamp(-tr.top / Math.max(1, tr.height - vh));
   const a = cfg.hero ? seg(p, 0, .92) : seg(p, 0, .7);
-  const c = cfg.hero || reduce ? 0 : E.inOut(seg(p, .7, .86));
-  // cover rect
+  // below the frame, the fold finishes sooner so the text has room to rise up under the print
+  const c = cfg.hero || reduce ? 0 : E.inOut(seg(p, .7, sc.side ? .86 : .82));
+  // cover rect; when it is wider than the screen, the camera pans along the scene's path
   const cw = Math.max(vw, vh * 1.5), ch = cw / 1.5;
-  const cl = (vw - cw) * cfg.focus[0], ct = (vh - ch) * cfg.focus[1];
+  const px = cfg.pan && cw - vw > 1 ? (sc.pan ||= spline(cfg.pan))(a) : null;
+  const fx = px === null ? cfg.focus[0] : clamp((px / 100 * cw - vw / 2) / (cw - vw));
+  const cl = (vw - cw) * fx, ct = (vh - ch) * cfg.focus[1];
   let L = cl, Tp = ct, W = cw, H = ch;
   if (!reduce && !cfg.hero) {
     const slot = sec.querySelector('.slot'), pr = pin.getBoundingClientRect();
     let sl, st2, sw, sh;
     if (sc.side) { const r = slot.getBoundingClientRect(); sl = r.left - pr.left; st2 = r.top - pr.top; sw = r.width; sh = r.width / 1.5; }
-    else { const gut = Math.max(16, vw * .04); sw = Math.min(vw - gut * 2, vh * .78 * 1.5); sh = sw / 1.5; sl = (vw - sw) / 2; st2 = Math.max(gut, vh - sh - Math.max(28, vh * .06)); }
+    else {
+      // a print across the top of the screen, with the text that follows pulled up to sit under it
+      const gut = Math.max(16, vw * .04); sw = Math.min(vw - gut * 2, vh * .78 * 1.5); sh = sw / 1.5; sl = (vw - sw) / 2; st2 = SAFE_TOP + Math.max(26, gut + 10);
+      const mt = `${Math.min(0, Math.round(st2 + sh + 14 - vh))}px`;
+      if (sc.text.style.marginTop !== mt) sc.text.style.marginTop = mt;
+    }
     L = lerp(cl, sl, c); Tp = lerp(ct, st2, c); W = lerp(cw, sw, c); H = lerp(ch, sh, c);
   }
   if (!reduce) {
@@ -785,7 +838,10 @@ function update(sc, T) {
   for (const arr of Object.values(S.layers)) for (const l of arr) { l.W = W; l.H = H; }
   S._cam = [1, 50, 50];
   cfg.run(reduce ? 1 : a, T, S);
-  const [z, ox, oy] = S._cam, zz = lerp(z, 1, c);
+  let [z, ox, oy] = S._cam;
+  // on a narrow crop, zoom around what the camera is following, and zoom less
+  if (px !== null) { const k = clamp((1 - vw / cw) / .35); ox = lerp(ox, px, k); z = lerp(z, 1 + (z - 1) * .45, k); }
+  const zz = lerp(z, 1, c);
   const camEl = stage.querySelector('.cam');
   camEl.style.transformOrigin = `${ox}% ${oy}%`; camEl.style.transform = zz !== 1 ? `scale(${zz.toFixed(4)})` : '';
   if (sc.side && !reduce && !cfg.hero) {
@@ -992,7 +1048,9 @@ const rail = document.getElementById('rail');
 rail.innerHTML = ERAS.map(e => `<a href="#${e.id}" data-id="${e.id}">${e.rail}</a>`).join('');
 const railLinks = [...rail.querySelectorAll('a')];
 const progress = document.getElementById('progress');
+let scrolled = false;
 function chrome() {
+  if (scrolled !== scrollY > innerHeight * .6) document.documentElement.classList.toggle('scrolled', scrolled = !scrolled);
   const max = document.documentElement.scrollHeight - innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
   let active = null;
