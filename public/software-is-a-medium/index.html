@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cut From Paper · Software Is a Medium Now</title>
+<title>Software Is a Medium of Creative Expression</title>
 <base href="/software-is-a-medium/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="canonical" href="https://www.joshmaldonado.com/software-is-a-medium/">
 <meta name="description" content="A cut-paper scroll story from cave walls to software, nine times over. A companion to Josh Maldonado’s FITC Web Unleashed 2026 talk, Software Is a Medium Now.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.joshmaldonado.com/software-is-a-medium/">
-<meta property="og:title" content="Cut From Paper · Software Is a Medium Now">
+<meta property="og:title" content="Software Is a Medium of Creative Expression">
 <meta property="og:description" content="A cut-paper scroll story from cave walls to software, nine times over. A companion to Josh Maldonado’s FITC Web Unleashed 2026 talk, Software Is a Medium Now.">
 <meta property="og:image" content="https://www.joshmaldonado.com/software-is-a-medium/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cut-paper hills and a winding road under the title Software Is a Medium Now.">
+<meta property="og:image:alt" content="Cut-paper hills and a winding road under the title Software Is a Medium of Creative Expression.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cut From Paper · Software Is a Medium Now">
+<meta name="twitter:title" content="Software Is a Medium of Creative Expression">
 <meta name="twitter:description" content="A cut-paper scroll story from cave walls to software, nine times over. A companion to Josh Maldonado’s FITC Web Unleashed 2026 talk, Software Is a Medium Now.">
 <meta name="twitter:image" content="https://www.joshmaldonado.com/software-is-a-medium/og.jpg">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -152,10 +152,11 @@ img { display: block; }
 .hero .stage { box-shadow: none; }
 .title { position: absolute; left: max(4%, env(safe-area-inset-left, 0px)); top: calc(env(safe-area-inset-top, 0px) + 9vh); display: flex; flex-direction: column; align-items: flex-start; gap: 10px; z-index: 5; max-width: 92%; margin: 0; }
 .static .hero .title { position: absolute; top: 6%; }
-.strip { display: inline-block; font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: 1; letter-spacing: -.06em; padding: .1em .3em .12em .26em; background: var(--cream); color: var(--ink); box-shadow: 4px 6px 0 rgba(0,0,0,.28); font-size: clamp(34px, 6.6vw, 104px); white-space: nowrap; will-change: transform; }
+.strip { display: inline-block; font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: 1; letter-spacing: -.06em; padding: .1em .3em .12em .26em; background: var(--cream); color: var(--ink); box-shadow: 4px 6px 0 rgba(0,0,0,.28); font-size: clamp(34px, 5.6vw, 92px); white-space: nowrap; will-change: transform; }
 .strip:nth-child(1) { transform: rotate(-2deg); }
 .strip:nth-child(2) { transform: rotate(1.2deg); background: var(--vermilion); color: var(--cream); margin-left: .45em; }
 .strip:nth-child(3) { transform: rotate(-.6deg); background: var(--chrome); }
+.strip:nth-child(4) { transform: rotate(.8deg); background: var(--ink); color: var(--cream); margin-left: .3em; }
 .hero-top { position: absolute; z-index: 5; left: 0; right: 0; top: calc(env(safe-area-inset-top, 0px) + 18px); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--cream); text-shadow: 0 1px 2px rgba(0,0,0,.5); }
 .cue { position: absolute; z-index: 5; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); transform: translateX(-50%); display: inline-flex; align-items: center; gap: 12px; color: var(--cream); background: rgba(22,22,27,.72); padding: 10px 16px; text-decoration: none; }
 .cue b { display: inline-block; animation: bob 2.4s ease-in-out infinite; }
@@ -240,6 +241,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: 
 .anim .strip { animation: slapin .8s cubic-bezier(.2, .9, .25, 1.15) backwards; }
 .anim .strip:nth-child(2) { animation-delay: .14s; }
 .anim .strip:nth-child(3) { animation-delay: .28s; }
+.anim .strip:nth-child(4) { animation-delay: .42s; }
 @keyframes slapin { from { transform: translateX(-130%) rotate(-10deg); } }
 
 /* sound toggle */
@@ -277,10 +279,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: 
     <div class="pin">
       <div class="stage"><div class="cam"></div></div>
       <div class="hero-top wrap label"><span>A companion to the FITC Web Unleashed 2026 talk</span><span>Josh Maldonado</span></div>
-      <h1 class="title" aria-label="Software is a medium now">
+      <h1 class="title" aria-label="Software is a medium of creative expression">
         <span class="strip">Software</span>
         <span class="strip">is a medium</span>
-        <span class="strip">now</span>
+        <span class="strip">of creative</span>
+        <span class="strip">expression</span>
       </h1>
       <a class="cue label" href="#intro"><b>&darr;</b> Scroll to build the road</a>
     </div>
@@ -850,7 +853,7 @@ function update(sc, T) {
   if (cfg.hero) {
     sec.querySelector('.title').style.transform = `translateY(${(-p * 30).toFixed(1)}px)`;
     sec.querySelectorAll('.strip').forEach((el, i) => {
-      const t = E.inOut(seg(p, .72 + i * .06, .9 + i * .04));
+      const t = E.inOut(seg(p, .7 + i * .05, .86 + i * .04));
       el.style.transform = t ? `translateX(${(-t * 115).toFixed(1)}%) rotate(${(STRIP_ROT[i] - t * 9).toFixed(2)}deg)` : '';
     });
     sec.querySelector('.cue').style.opacity = 1 - seg(p, 0, .12);
@@ -861,7 +864,7 @@ function update(sc, T) {
 /* ── scroll-driven text ──────────────────────────────────
    Each [data-fx] element plays from t = 0..1. Text beside a pinned scene takes t from the
    scene's progress; text in normal flow takes it from where it sits in the viewport. */
-const STRIP_ROT = [-2, 1.2, -.6];
+const STRIP_ROT = [-2, 1.2, -.6, .8];
 const COUNT = { cave: [0, 40000], press: [1000, 1450], photo: [1450, 1900], sound: [1900, 1963], film: [1963, 1965], desktop: [1965, 1985], web: [1985, 1991], phone: [1991, 2005], now: [2005, 2026, '', 'Now'] };
 function splitWords(el) {
   const walk = (node) => [...node.childNodes].forEach(n => {
