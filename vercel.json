@@ -9,6 +9,10 @@
       "destination": "/software-is-a-medium/index.html"
     },
     {
+      "source": "/fitc-deck/",
+      "destination": "/fitc-deck/index.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
@@ -17,6 +21,11 @@
     {
       "source": "/software-is-a-medium",
       "destination": "/software-is-a-medium/",
+      "permanent": true
+    },
+    {
+      "source": "/fitc-deck",
+      "destination": "/fitc-deck/",
       "permanent": true
     },
     {
