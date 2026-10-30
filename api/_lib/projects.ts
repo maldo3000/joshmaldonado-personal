@@ -27,6 +27,8 @@ export type PortfolioProject = {
   }[]
   /** Tool-by-tool build breakdown, listed under the case study */
   workflow?: { tool: string; description: string }[]
+  /** Who did what, listed at the end of the case study */
+  credits?: { role: string; name: string }[]
   /** External destination — used when there is no case-study page */
   externalUrl?: string
   /** Present → row opens /portfolio/p/:slug */
@@ -193,6 +195,44 @@ export const projects: PortfolioProject[] = [
   },
 
   // ── FILM, VIDEO & CONTENT ───────────────────────────────────────
+  {
+    slug: 'diamond-ai-hybrid-shoot',
+    client: 'Diamond Agency',
+    title: 'VFX AI Hybrid Shoot',
+    kind: 'BRANDED FILM',
+    category: 'content',
+    tags: ['Video', 'AI', 'VFX', 'Live Action', 'Generative Media', 'Production'],
+    role: 'Producer — via Quiver',
+    year: '2026',
+    blurb:
+      'A live-action spot for Diamond with an AI-generated creature composited into sixteen shots — a lab, two hazmat suits and a blob that sings Canadian jingles.',
+    media: {
+      video: '/videos/diamond-aoy-preview.mp4',
+      poster: '/videos/diamond-aoy-poster.jpg',
+    },
+    films: [
+      {
+        video: '/videos/diamond-aoy.mp4',
+        poster: '/videos/diamond-aoy-poster.jpg',
+        orientation: 'horizontal',
+      },
+    ],
+    caseStudy: {
+      intro:
+        'Diamond wanted a creature that could carry a two-minute spot: grown in a lab, cooked in an incubator and singing every jingle a Canadian grew up with.',
+      body: [
+        'We shot the spot in live action and built the creature with AI-driven VFX: sixteen shots where the blob was generated, animated to its vocal and composited into the graded plates, so the performers react to something that sits in the room with them.',
+        'I produced it through Quiver, from the shoot through the finish: placing all sixteen VFX finals into the cut, matching each one to the grade and to the vocal it was animated to, and delivering a picture-locked master with the final mix and stems.',
+      ],
+    },
+    credits: [
+      { role: 'Client', name: 'Diamond Agency' },
+      { role: 'Producer', name: 'Josh Maldonado' },
+      { role: 'VFX Supervisor', name: 'Thiago Carneiro' },
+      { role: 'Executive Producer', name: 'Graham Budd, Quiver' },
+    ],
+    externalUrl: 'https://vimeo.com/1237569888',
+  },
   {
     slug: 'square-brand-video',
     client: 'Square',
@@ -448,6 +488,128 @@ export const projects: PortfolioProject[] = [
   },
 
   // ── INTERACTIVE PRODUCTS & PLATFORMS ────────────────────────────
+  {
+    slug: 'the-brand-agent',
+    client: 'R&D',
+    title: 'The Brand Agent',
+    kind: 'AI CONTENT SYSTEM',
+    category: 'interactive',
+    tags: ['AI', 'Agents', 'Creative Automation', 'Generative Media', 'Brand Systems'],
+    role: 'Creator',
+    year: '2026',
+    blurb:
+      'One repo per brand that makes, composes and ships on-brand work with agents — the brand written down as data, with generation, composition and distribution built on top.',
+    media: {
+      video: '/videos/the-brand-agent-preview.mp4',
+      poster: '/videos/the-brand-agent-poster.jpg',
+    },
+    films: [
+      {
+        video: '/videos/the-brand-agent.mp4',
+        poster: '/videos/the-brand-agent-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'The brand agent in 80 seconds.',
+      },
+    ],
+    gallery: [
+      '/brand-agent/bip1.jpg',
+      '/brand-agent/bipstory.jpg',
+      '/brand-agent/dev1.jpg',
+      '/brand-agent/ad45.jpg',
+      '/brand-agent/ad916.jpg',
+      '/brand-agent/esperanza.jpg',
+      '/brand-agent/permset.jpg',
+    ],
+    caseStudy: {
+      intro:
+        'Agents can make content at volume now. The hard part is making the hundredth piece look and sound as much like the brand as the first. The brand agent is how I solve that.',
+      body: [
+        'Each brand gets one git repository. Its foundation is the brand as creative reference data: tokens.json for exact colors, type and formats, BRAND.md for voice and the rules that never bend, and a canon of approved work with a note on why each piece works. Every agent and every template reads from those same files, so changing one token changes every new piece that follows.',
+        'Three layers sit on that foundation. Generation calls fal for image and video models, HyperFrames and Remotion for motion, and ElevenLabs for voice and sound. Composition turns that material into finished carousels, stories, ads and films with Claude Design, Figma and ffmpeg, then checks them against the canon. Distribution schedules and posts approved work and reads paid-social results back from Meta Ads, so what performs joins the canon.',
+        'The repo also takes care of the logistics: every export named brand, name and ratio, every campaign in the same folder layout and archived to the shared drive, every format laid out again for its own size rather than cropped, and bilingual rules applied to every post. It runs CTRL+SHIFT, ASMBLY, Rey de Gloria, Permission and Polymorphik today.',
+      ],
+    },
+    workflow: [
+      {
+        tool: 'Foundation',
+        description:
+          'tokens.json, BRAND.md, canon/ and assets/ — the brand as data every agent reads.',
+      },
+      {
+        tool: 'Generation',
+        description: 'fal, HyperFrames, Remotion and ElevenLabs.',
+      },
+      {
+        tool: 'Composition',
+        description:
+          'Claude Design, Figma, ffmpeg and headless Chrome, with a review against the canon.',
+      },
+      {
+        tool: 'Distribution',
+        description: 'Postiz, a browser agent and the Meta Ads MCP.',
+      },
+    ],
+    externalUrl: '/notes/the-brand-agent',
+  },
+  {
+    slug: 'software-is-a-medium',
+    client: 'FITC',
+    title: 'Software Is a Medium',
+    kind: 'AI INTERACTIVE WEBSITE',
+    category: 'interactive',
+    tags: ['Interactive', 'AI', 'Web', 'Generative Media', 'Scroll Story'],
+    role: 'Creator',
+    year: '2026',
+    blurb:
+      'A cut-paper scroll story that goes with my FITC talk — every era of creative media builds itself as you scroll, with sound, all of it made with generative tools.',
+    media: {
+      video: '/videos/software-is-a-medium-preview.mp4',
+      poster: '/videos/software-is-a-medium-poster.jpg',
+    },
+    films: [
+      {
+        video: '/videos/software-is-a-medium.mp4',
+        poster: '/videos/software-is-a-medium-poster.jpg',
+        orientation: 'horizontal',
+        caption: 'A scroll through the site, recorded frame by frame.',
+      },
+    ],
+    caseStudy: {
+      intro:
+        'Software Is a Medium of Creative Expression is the companion to my FITC talk: an argument that software is now a medium in its own right, told as a website rather than a slide.',
+      body: [
+        'Each era, from cave paintings through print, photography, film and the web to now, is one pinned paper scene. Every moving part is its own cutout that scroll plays into place before the scene folds into a taped print and the text comes in. On phones a camera path follows the action so it reads at a third of the width.',
+        'The art pipeline runs on fal: SAM 3 cuts the moving parts out of each illustration, Nano Banana paints the clean plates behind them, and Kling animates the cinema screen. Sound effects are generated with ElevenLabs and fire as you scroll past each moment.',
+      ],
+    },
+    workflow: [
+      {
+        tool: 'Figma AI',
+        description: 'The original cut-paper illustrations for each era.',
+      },
+      {
+        tool: 'SAM 3 via fal',
+        description: 'Segmentation — every moving part cut out as its own layer.',
+      },
+      {
+        tool: 'Nano Banana via fal',
+        description: 'Clean plates painted behind the cutouts.',
+      },
+      {
+        tool: 'Kling via fal',
+        description: 'The film-era cinema screen, scrubbed by scroll.',
+      },
+      {
+        tool: 'ElevenLabs',
+        description: 'Sound effects and background loops cued to scroll.',
+      },
+      {
+        tool: 'Headless Chrome',
+        description: 'The demo video, captured frame by frame with its own mix.',
+      },
+    ],
+    externalUrl: '/software-is-a-medium/',
+  },
   {
     slug: 'dc-digital-collectibles',
     client: 'DC Comics',

@@ -250,6 +250,23 @@ export default function CaseStudyPage() {
           </section>
         )}
 
+        {project.credits && (
+          <section
+            className="pf-case-workflow pf-case-credits"
+            aria-label="Credits"
+          >
+            <p className="pf-case-workflow-label">Credits</p>
+            <ol>
+              {project.credits.map((credit) => (
+                <li key={credit.role}>
+                  <span className="pf-workflow-tool">{credit.role}</span>
+                  <span className="pf-workflow-desc">{credit.name}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
         {project.externalUrl && (
           <a
             className="pf-case-link"

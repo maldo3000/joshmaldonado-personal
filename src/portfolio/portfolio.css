@@ -704,6 +704,10 @@
   line-height: 1.8;
 }
 
+.pf-case-credits li {
+  grid-template-columns: minmax(7rem, 13rem) minmax(0, 1fr);
+}
+
 @media (max-width: 640px) {
   .pf-case-workflow li {
     grid-template-columns: 1.8rem minmax(0, 1fr);
@@ -712,6 +716,15 @@
 
   .pf-workflow-desc {
     grid-column: 2;
+  }
+
+  .pf-case-credits li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+  }
+
+  .pf-case-credits .pf-workflow-desc {
+    grid-column: 1;
   }
 }
 
