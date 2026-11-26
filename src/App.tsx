@@ -686,8 +686,17 @@ function App() {
               ))}
             </nav>
             <p className="intro">
-              Creative Producer & Product Manager // currently building a
-              platform for curious, future-minded creatives @{' '}
+              Director of Digital + Innovation @{' '}
+              <a
+                className="inline-highlight-link"
+                href="https://zulualphakilo.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Zulu Alpha Kilo
+              </a>{' '}
+              // also building a platform for curious, future-minded creatives
+              @{' '}
               <a
                 className="inline-highlight-link"
                 href="https://ctrlshift.community/"
