@@ -277,6 +277,11 @@
   height: 2.6rem;
 }
 
+/* Stacked mark — taller so the small type stays legible */
+.logo-item img[src$='zulu-alpha-kilo.svg'] {
+  height: 3.4rem;
+}
+
 @keyframes marquee {
   to {
     transform: translateX(-50%);
