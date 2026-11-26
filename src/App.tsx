@@ -697,7 +697,7 @@ function App() {
               >
                 Zulu Alpha Kilo
               </a>{' '}
-              // building the ecosystem of new creatives. Hit{' '}
+              // building the ecosystem of new creatives @{' '}
               <a
                 className="inline-highlight-link"
                 href="https://ctrlshift.community/"
@@ -706,7 +706,6 @@ function App() {
               >
                 CTRL+SHIFT
               </a>
-              .
             </p>
             <p className="bio">
               I like to understand technology conceptually and
