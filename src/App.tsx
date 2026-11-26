@@ -15,6 +15,7 @@ type Logo = {
 }
 
 const logos: Logo[] = [
+  { name: 'Zulu Alpha Kilo', src: '/logos/zulu-alpha-kilo.svg' },
   { name: 'Intel', src: '/logos/intel.svg' },
   { name: 'Square', src: '/logos/square.svg' },
   { name: 'PokerStars', src: '/logos/pokerstars.svg' },
@@ -26,6 +27,7 @@ const logos: Logo[] = [
   { name: 'Candy Digital', src: '/logos/candy.png' },
   { name: 'WonderMakr', src: '/logos/wondermakr.png' },
   { name: 'Permission', src: '/logos/permission.png' },
+  { name: 'Magnific' },
 ]
 
 type Service = {
@@ -686,8 +688,16 @@ function App() {
               ))}
             </nav>
             <p className="intro">
-              Creative Producer & Product Manager // currently building a
-              platform for curious, future-minded creatives @{' '}
+              Director of Digital + Innovation @{' '}
+              <a
+                className="inline-highlight-link"
+                href="https://zulualphakilo.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Zulu Alpha Kilo
+              </a>{' '}
+              // building the ecosystem of new creatives. Hit{' '}
               <a
                 className="inline-highlight-link"
                 href="https://ctrlshift.community/"
@@ -696,6 +706,7 @@ function App() {
               >
                 CTRL+SHIFT
               </a>
+              .
             </p>
             <p className="bio">
               I like to understand technology conceptually and
