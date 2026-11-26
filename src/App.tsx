@@ -656,7 +656,7 @@ function App() {
       <main className="page">
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">Creative Producer & Product Manager</p>
+            <p className="eyebrow">Digital + Innovation Leader</p>
             <div className="hero-title-row">
               <h1 id="hero-title">Josh Maldonado</h1>
               <a
